@@ -1,0 +1,12 @@
+----------------------------------------------------------------------------------------------------
+Additive Isomorphism to Scalar Algebra; Real Vectors; Expected? True
+Assertion Error, line 193: Additive Isomorphism to Scalar Algebra; Real Vectors
+(V1 + V2).magnitude == (V1.magnitude + V2.magnitude), "Additive Isomorphism to Scalar Algebra"
+V1:(7.43,-9.6);(12.15<5.37) || V2:(-6.26,6.23);(8.83<2.35) || V3:(-0.68,5.44);(5.49<1.69) || V4:(2.76,8.63);(9.06<1.26)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Multiplicative Continuity of Inverse Comparison; Real Vectors; Expected? True
+Assertion Error, line 233: Multiplicative Continuity of Inverse Comparison; Real Vectors
+-minV1 > -maxV1, "Multiplicative Continuity of Inverse Comparison"
+V1:(7.43,-9.6);(12.15<5.37) || V2:(-6.26,6.23);(8.83<2.35) || V3:(-0.68,5.44);(5.49<1.69) || V4:(2.76,8.63);(9.06<1.26) || minV1:(-6.26,6.23);(8.83<2.35) || minV2:(-0.68,5.44);(5.49<1.69) || minV3:(-0.68,5.44);(5.49<1.69) || maxV1:(7.43,-9.6);(12.15<5.37) || maxV2:(-6.26,6.23);(8.83<2.35) || maxV3:(7.43,-9.6);(12.15<5.37)
+----------------------------------------------------------------------------------------------------
