@@ -1,0 +1,131 @@
+What is a logarithm?  It's a function such that
+logb(b^x) = x
+
+For a complex number raised to an integer power, this means that
+logw(w ^ x) = x
+
+For example:
+If  w = (1, 3i) and x = 2,  w ^ x = (-8, 8i)
+Then, logCl((-8, 8i)) = 2
+
+let w = (wx + wyi)
+let z = (zx + zyi)
+let w^z = k
+What is k?
+
+logw(w^z) = z          <<definition of a logarithm
+logw(w^z) = logw(k)    <<w^z = k
+logw(k) = z              <<simple substitution
+
+
+ln(x) = loge(x)                    <<definition of ln
+loga(x) = logb(x) / logb(a)        <<general logarithm rule
+loga(x) = ln(x) / ln(a)            <<substitution from line 22
+logw(w^z) = ln(w^z) / ln(w)        <<substitution from problem definition
+logw(k) = ln(k) / ln(w)            <<substitution k = w ^ z
+ln(k) = logw(k) * ln(w)            <<multiplication by ln(w); rearranging
+k = e^[logw(k)*ln(w)]              <<raise both sides to an exponent
+k = e^[z*ln(w)]                    <<substituion from line 19
+w^z = e^[z*ln(w)]                  <<substituion from line 14
+w' = ln(w) ==> e^(w') = w          <<defining a new term w'; e^ln(x)= x
+
+Suppose  w = rw*e^(iθw)               <<good guess from the guys who know the answer
+Then w' = ln(rw*e^(iθw))              <<substitution from line 31
+w' = ln(rw) + ln(e^(iθw))             <<ln(ab) = ln(a) + ln(b)
+w' = ln(rw) + iθw						<<ln(e(x)) = x
+w = e^(w')							<<copied from line 31
+w = e^(ln(rw) + iθw)                 << substituting w' from line 36
+w = [e^ln(rw)]*[e^(iθw)]              << x^(a+b) = x^a*x^b
+w = rw*e^(iθw)						<<e^ln(x) = x
+
+w^z = [rw*e^(iθw)]^z                  <<raising line 40 to the zth power
+w^z = e^[z*ln(w)]                   <<copied from line 30
+[rw*e^(iθw)]^z = e^[z*ln(w)]          <<combining lines 42, 43
+[rw*e^(iθw)]^z = e^[z*w']             <<substitution from line 31
+[rw*e^(iθw)]^z = e^[z*(ln(rw) + iθw)]   <<substitution from line 36
+if w = rw*e^(iθw), then					<<definition of a complex vector in exponential form
+w^z = e^[z * ln(rw) + iθw]				<<substituion of 47 into 46
+
+w^z = e^[zx * ln(rw) + zyi * ln(rw) + iθw]  <<spliting z into cartesian coordinates
+w^z = e^[zx * ln(rw) + i(zy * ln(rw) + θw)] <<consolidating imaginary factors
+w^z = e^[zx * ln(rw)] * e^[i * (zy * ln(rw) + θw)] <<x^(a+b) = x^a*x^b
+
+if k = w^z,
+rk = e^[zk * ln(rw)]
+θk = (zy * ln(rw) + θw)
+rk^2 = (e^[zk * ln(rw)] )^ 2
+rk^2 = e^[2 * zk * ln(rw)]
+
+v = rv(cosθv + isinθv)
+v = rv*e^(iθv)  <<equivalent expression
+vx = rv*cos(θv)
+vy = rv*sin(θv)
+(vx^2 + vy^2)^.5 = rv
+vx^2 + vy^2 = rv^2
+
+Going a bit deeper
+
+say w = (c + di) and z = (a + bi)
+let k = w ^ z
+then
+ln(k) = ln(w ^ z)
+ln(k) = z*ln(w)
+ln(k) = (a+bi)ln(c+di)
+
+if r = (c^2 + d^2)^0.5
+and θ = tan-1(d/c)
+then
+ln(k) = (a+bi)*ln(c+di)
+ln(k) = (a+bi)*ln(
+
+does c + di = ln(r) + iθ?
+
+e^(x + iy) = e^x e^iy
+Then
+k = w ^ z
+
+
+in real numbers, how does x ^ y relate to e^x and e^y?
+
+x^y = k
+e^(x^y) = e^k
+ln(x^y) = ln(k)
+y*ln(x) = ln(k)
+e^y*ln(x) = k
+so x^y = e^y*ln(x)
+to solve this, we need to define a complex logarithm
+
+V2 = ln(V1) is defined such that e^V2 = V1
+...and we're in a loop...
+
+
+x = r(cosθ + isinθ)
+  = re^(iθ)
+
+z = ae^(iθ1)
+w = be^(iθ2)
+zw = abe^(i(θ1+θ2))
+
+
+let's look at e^V where V is a vector whose multiplication is given by 
+V1*V2 = |V1| * |V2| < θ1 + θ2
+And V1 ** n = |V|^n < θ^n
+VI is defined such that VI * V = V for any vector; this is given by VI = 1 < 0
+
+We will define exp(V) as the sum from k = 0 to infinity of V^k / k!:
+exp(V) = I + V + 1/2!V^2 + 1/3!V^3 + ...
+e = exp(I) =  I * Σ(1/k)! from k = 0 to infinity
+Therefore, in vector notation, Ve = e * I; I will designate this E
+E = e * I
+E = (e, 0)
+E = (e<0)
+
+x^y = ln(x^y) = y * ln(x) = k
+x = e^k/y 
+
+
+This has the following properties:
+d/dV E^V = E^V for all V
+E^0 = I
+E^V * E^-V = I
+since V1 * V2 = V2 * V1, e^(V1 + V2) = e^(V2 + V1)

@@ -1,0 +1,256 @@
+"""
+I am wondering what the correlation is between imaginary arithmetic
+and vector arithmetic.  Is there a way of defining vector arithmetic
+that is isomorphic to imaginary arithmetic?  If so, how would such
+a system conceptually include things like raising a real number to a complex
+number?
+
+Let's consider an imaginary number to be simply a vector Vi = (x, y)
+
+How does (a, b) + (c, d) correlate to (a, bi) + (c, di)?
+    This is obviously the same.  Don't need to check.
+How does (a, b) - (c, d) correlate to (a, bi) - (c, di)?
+    This is obviously the same.  Don't need to check.
+
+
+How does (a, b) x (c, d) correlate to (a, bi) * (c, di)?
+How does (a, b) / (c, d) correlate to (a, bi) / (c, di)?
+
+To answer these questions, we'll need to define a new type of vector
+multiplication.  It won't be the dot product, since that returns
+a scalar.  It won't be the cross product, since that returns a vector
+perpendicular to the two vectors, and we want a method that returns
+a vector in the same plane.
+
+
+Let's define a vector multiplication operator, *, where
+V1 * V2 = |V1| * |V2| < θ1 + θ2
+
+How would division work in such a system?
+if V3 = V1 * V2, then V3 / V1 = V2 and V3 / V2 = V1
+
+What operation gives this?  Simply the reverse of multiplication:
+V3 / V1 = |V3| / |V1| < θ3 - θ1
+
+Testing these using random inputs indicates that this method of multiplication
+and division is in fact isomorphic to complex multiplication and division.
+Great!  We've come up with a mapping from complex numbers to vectors, as
+we had hoped.
+
+How about exponentiation?  For a vector raised to a positive integer n,
+this will be simply a vector multiplied by itself n times.  But what about
+non-integers and negative numbers?
+
+Conceptually, vector multiplication is simply scalar multiplication of the
+magnitude combined with scalar addition of the angle.  Therefore, we can
+exponentiate the magnitude using normal methods.  We should note here that normal
+scalar exponentiation would allow the magnitude to be positive or negative.
+We will instead require the magnitude to always be positive and allow the
+angle to be rotated by pi radians / 180 degrees.  This is conceptually similar
+to the idea that (n^2)^.5 = +/- n
+For the angle, we should consider what happens when we take the square root
+of a squared vector, and the third root of a cubed vector, etc., and see if
+we can extrapolate from there.
+
+For a vector V1 squared, the angle of the resulting vector V2 will be
+θ2 = θ1 * 2 (multiplication is just addition to the nth power)
+Therefore, when taking the square root of a vector V1, the angle
+of the resulting vector V2 will be
+θ2 = θ1 / 2
+For a vector V1 cubed the angle of the resulting vector V2 will be
+θ2 = θ1 * 3
+Therefore, when taking the cubic root of a vector V1, the angle
+of the resulting vector V2 will be
+θ2 = θ1 / 3
+We can extrapolate to say that for a vector V1 raised to a real
+power r, the angle of the resulting vector V2 will be
+θ2 = θ1 * r
+
+Therefore, we can say that vector exponentiation follows the following
+rules:
+If |n| > 1 or 1/n is not divisible by 2:
+V^n = |V|^n < θ*n
+If 0 < |n| < 1 and (1/n) is divisible by 2:
+V^n = |V|^n < θ*n or |V|^n < θ*n + pi
+This can awkwardly but more correctly be written:
+V^2 = |V|^n < θ*n - pi/2 +/- pi/2
+
+Given that the multiplication of vectors in this manner is isomorphic
+to multiplication of imaginary numbers, we can use the same formula
+to calculate the exponentiation of imaginary numbers.  However, let's
+go ahead and use the same reasoning on imaginary numbers.
+
+For an imaginary number I1 squared, the real portion of the new number will
+be the real portion of the number squared less the imaginary portion of
+the number squared.  The imaginary portion of the number squared will be
+twice the multiple of the imaginary and real portions of the number:
+I1 = (x,yi)
+I2 = (u, vi)
+I1^2 = I2
+I1^2 = (x^2 - y^2, 2*x*y i)
+From this we can see that u = x^2 - y^2 and v = 2*x*y
+
+If we can define x and y in terms of u and v, we can calculate the square root
+of an arbitrary imaginary number I2 = (u, vi)
+
+This is a system of 2 unknowns and 2 equations.
+lets substitute y into the first equation by isolating it in the
+second equation:
+
+v = 2*x*y
+y = v/(2*x)
+u = x^2 - y^2
+u = x^2 - [v^2/(4*x^2)]
+4*u*x^2 = 4*x^4 - v^2 
+if X = x^2,
+4*X^2 - 4*u*X - v^2 = 0
+This is a quadratic equation of the form ax^2 + bx + c = 0 where
+a = 4; b = -4*u; and c = v^2
+therefore
+X = [-b +/- (b^2 - 4*a*c)^.5]/(2*a)
+X = [4*u +/- (16*u^2 - 16*v^2)^.5]/8
+X = u/2 +/- [(u^2 - v^2)^.5/2]
+x^2 = u/2 +/- [(u^2 - v^2)^.5/2]
+u = x^2 - y^2
+y^2 = x^2 - u
+y^2 = -u/2 +/- [(u^2 - v^2)^.5/2]
+y = +/- (-u/2 +/- [(u^2 - v^2)^.5/2])^.5
+x = +/- (u/2 +/- [(u^2 - v^2)^.5/2])^.5
+x and y must both be real (non-imaginary) numbers, which puts some
+constraints on this system
+First of all, y is constrained since the inner part must be positive:
+y = +/- (-u/2 + [(u^2 - v^2)^.5])^.5
+to solve y, (u^2 - v^2)^.5 must be greater than u/2.
+this puts a constraint on x:
+x = +/- (u/2 + [(u^2 - v^2)^.5/2])^.5
+Therefore, there are four possible imaginary numbers that solve this.
+From our vector multiplication analysis, we know that there must
+always be at least one possible solution.
+
+We will program this out and see if it works
+
+For an imaginary number I1 cubed, this is a bit trickier:
+I2 = (x + yi)^3
+n = x^2 - y^2
+m = 2*x*y
+I2 = (x + yi) * (n + mi)
+I2 = x*n-y*m + (x*m + y*n)i
+I2 = x^3-x*y^2-2*x*y^2 + (2*x^2*y + x^2*y - y^3)i
+If u = x^3-x*y^2-2*x*y^2 and v = 2*x^2*y + x^2*y - y^3,
+what are x and y in terms of u and v?
+First, u and v can both be simplified:
+u = x^3-3*x*y^2    OR   u = x(x^2-3*y^2)
+v = 3*x^2*y - y^3  OR   v = y(3*x^2-y^2)
+We can change the u equation around a bit to make a substitution:
+u/x = x^2 - 3*y^2
+x^2 = u/x + 3*y^2
+v = y(3*u/x + 9*y^2 - y^2)
+v = y(3*u/x + 8*y^2)
+y(3*u*x + 8*y^2) = y(3*x^2-y^2)
+3*u*x + 8*y^2 = 3*x^2 - y^2
+3*u*x = 3*x^2 - 9*y^2
+u = x - 3*y^2/x
+x - 3*y^2/x = x^3 - 3*x*y^2
+y^2(3/x+3*x) = x^3 - x
+y^2(3+3*x^2) = x^4 - x^2
+y^2 = (x^4 - x^2) / 3(x^2+1)
+
+
+
+
+
+
+
+What about raising a number to the power of a vector?  What could this
+conceptually even mean?
+
+Here, I believe it is easier to conceptualize 
+"""
+
+import random
+import vectorArithmetic
+
+"""
+to solve y, (u^2 - v^2)^.5 must be greater than u/2.
+Also, u must be greater than y.
+y = +/- (-u/2 + [(u^2 - v^2)^.5])^.5
+x = +/- (u/2 + [(u^2 - v^2)^.5/2])^.5
+"""
+class imaginaryRootable(vectorArithmetic.imaginaryVector)
+    def squareRoot(self):
+        if self.y > self.x:
+            return False
+        if ((self.x**2)-(self.y**2)) < (self.x/2):
+            return False
+        x = ((self.x/2)+((self.x**2-self.y**2)**.5)/2)**.5
+        y = (-(self.x/2)+((self.x**2-self.y**2)**.5)/2)**.5
+        result1 = self.__class__(x, y)
+        result2 = self.__class__(x, -y)
+        result3 = self.__class__(-x, y)
+        result4 = self.__class__(-x, -y)
+        return (result1, result2, result3, result4)
+
+def testNRealVectors(n, valRange = (-1000, 1000)):
+    for i in range(n):
+        x1 = random.uniform(valRange[0], valRange[1])
+        y1 = random.uniform(valRange[0], valRange[1])
+        testRoot(x1, y1)
+
+def testNIntegerVectors(n, valRange = (-1000, 1000)):
+    for i in range(n):
+        x1 = random.randint(valRange[0], valRange[1])
+        y1 = random.randint(valRange[0], valRange[1])
+        testRoot(x1, y1)
+
+def testRoot(x1, y1):
+    vector = imaginaryRootable(x = x1, y = y1)
+    resultSet = vector.squareRoot()
+    if resultSet:
+        
+
+    imagExpVec = imagVec1 * imagVec2
+    newMultVec = newVec1 * newVec2
+    
+    imagDivVec1 = imagVec1 / imagVec2
+    imagDivVec2 = imagMultVec / imagVec1
+    imagDivVec3 = imagMultVec / imagVec2
+    newDivVec1 = newVec1 / newVec2
+    newDivVec2 = newMultVec / newVec1
+    newDivVec3 = newMultVec / newVec2
+    
+    multSame = imagMultVec == newMultVec
+    divSame = (imagDivVec1 == newDivVec1 and
+               imagDivVec2 == imagVec2 and
+               imagDivVec3 == imagVec1 and
+               newDivVec2 == newVec2 and
+               newDivVec3 == newVec1)
+    
+    print(f"Vector1: {x1}, {y1}")
+    print(f"Vector2: {x2}, {y2}")
+    print(f"multiplication is the same: {multSame}")
+    print(f"division is the same: {divSame}")
+    if multSame and divSame:
+        print("multiplication results:")
+        print(f"{imagMultVec.x}, {imagMultVec.y}")
+        print("division results:")
+        print(f"{imagDivVec1.x}, {imagDivVec1.y}")
+    if not multSame:        
+        print("imaginary multiplication results:")
+        print(f"{imagMultVec.x}, {imagMultVec.y}")
+        print("new vector multiplication results:")
+        print(f"{newMultVec.x}, {newMultVec.y}")
+    if not divSame:
+        print("imaginary division results forward:")
+        print(f"{imagDivVec1.x}, {newDivVec1.y}")
+        print("new vector division results forward:")
+        print(f"{newDivVec1.x}, {newDivVec1.y}")
+        print("imaginary division results reverse 1 (should equal Vector2):")
+        print(f"{imagDivVec2.x}, {imagDivVec2.y}")
+        print("imaginary division results reverse 2 (should equal Vector1):")
+        print(f"{imagDivVec3.x}, {imagDivVec3.y}")
+        print("new vector division results reverse 1 (should equal Vector2):")
+        print(f"{newDivVec2.x}, {newDivVec2.y}")
+        print("new vector division results reverse 2 (should equal Vector1):")
+        print(f"{newDivVec3.x}, {newDivVec3.y}")
+        print("-------------------------------")
+
