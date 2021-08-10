@@ -1,0 +1,1 @@
+I never really wrapped my head around imaginary numbers.  I can memorize formulas as well as anyone but I've really struggled to conceptualize them.  I'm trying to put together a list of operators that are algebraically consistent with respect to both vectors and imaginary numbers.  If I can find a good mapping, I think it will help me conceptualize how imaginary numbers work.
