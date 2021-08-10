@@ -1,13 +1,13 @@
 import math
 import numbers
-
+from typing import Union
 
 # we will use syntax return self.__class__(definition) for
 # operator overloading in this class so that inherited methods create
 # objects of the correct subclass
 
 
-def vectorMethod(func):
+def vectorMethod(func) -> callable:
     def decorated(self, other, *args, **kargs):
         if isinstance(other, Vector):
             return func(self, other, *args, **kargs)
@@ -18,7 +18,7 @@ def vectorMethod(func):
     return decorated
 
 
-def scalarMethod(func):
+def scalarMethod(func) -> callable:
     def decorated(self, other, *args, **kargs):
         if isinstance(other, Vector):
             return func(self, other, *args, **kargs)
@@ -34,8 +34,8 @@ class Vector:
     relTol = 1e-05
 
     def __init__(self, x=None, y=None, θ=None, magnitude=None):
-        if (not x is None) and (not y is None):
-            if (not θ is None) or (not magnitude is None):
+        if (not (x is None)) and (not (y is None)):
+            if (not (θ is None)) or (not (magnitude is None)):
                 raise TypeError("if x and y are specified neither θ nor magnitude may be specified.")
             self.x = x
             self.y = y
@@ -51,8 +51,8 @@ class Vector:
                 self.θ += math.pi
                 self.θ = self.θ % (2 * math.pi)
 
-        elif (not θ is None) and (not magnitude is None):
-            if (not x is None) or (not y is None):
+        elif (not (θ is None)) and (not (magnitude is None)):
+            if (not (x is None)) or (not (y is None)):
                 raise TypeError("if θ and magnitude are specified neither x nor y may be specified.")
             self.magnitude = magnitude
             self.θ = θ % (2 * math.pi)
@@ -64,129 +64,140 @@ class Vector:
     # <editor-fold desc="Algebraic Operators">
     # <editor-fold desc="Addition Subtraction Negation">
     @scalarMethod
-    def __add__(self, other):
+    def __add__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             x = self.x + other.x
             y = self.y + other.y
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (float, int)):
             x = self.x + other
             y = self.y
+        else:
+            return NotImplemented
         return self.__class__(x=x, y=y)
 
     @scalarMethod
-    def __sub__(self, other):
+    def __sub__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             x = self.x - other.x
             y = self.y - other.y
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (float, int)):
             x = self.x - other
             y = self.y
+        else:
+            return NotImplemented
         return self.__class__(x=x, y=y)
 
-    def __neg__(self):
+    def __neg__(self) -> "Vector":
         return self.__class__(x=-self.x, y=-self.y)
     # </editor-fold>
 
     # <editor-fold desc="Mutiplication Division">
     @scalarMethod
-    def __mul__(self, other):
+    def __mul__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             magnitude = self.magnitude * other.magnitude
             θ = self.θ + other.θ
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (float, int)):
             magnitude = self.magnitude * other
             θ = self.θ
+        else:
+            return NotImplemented
         return self.__class__(magnitude=magnitude, θ=θ)
 
     @scalarMethod
-    def __truediv__(self, other):
+    def __truediv__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             magnitude = self.magnitude / other.magnitude
             θ = self.θ - other.θ
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (float, int)):
             magnitude = self.magnitude / other
             θ = self.θ
+        else:
+            return NotImplemented
         return self.__class__(magnitude=magnitude, θ=θ)
     # </editor-fold>
 
     # <editor-fold desc="Exponentiation Natural Logarithm">
     @scalarMethod
-    def __pow__(self, other):
+    def __pow__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             magnitude = self.magnitude ** other.magnitude
             θ = self.θ * (other.θ - 1) - other.θ
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (float, int)):
             magnitude = self.magnitude ** other
             θ = self.θ * other
+        else:
+            return NotImplemented
         return self.__class__(magnitude=magnitude, θ=θ)
 
-    def ln(self):
+    def ln(self) -> "Vector":
         # LN(W) = ln(|W|) < - θW
         if self.magnitude == 0:
             return NotImplemented
         magnitude = math.log(self.magnitude)
         θ = - self.θ
-        return self.__class__(magnitude = magnitude, θ = θ)
+        return self.__class__(magnitude=magnitude, θ=θ)
     # </editor-fold>
     # </editor-fold>
 
     # <editor-fold desc="Comparison Operators">
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return self.magnitude > 0
 
-    def __abs__(self):
+    def __abs__(self) -> float:
         return self.magnitude
 
     @scalarMethod
-    def __eq__(self, other):
+    def __eq__(self, other: Union["Vector", int, float]) -> bool:
         if isinstance(other, Vector):
             absTol = 1e-05
             relTol = 1e-05
             return math.isclose(self.magnitude, other.magnitude, rel_tol=relTol, abs_tol=absTol)
-        elif isinstance(other, numbers.Number):
+        elif isinstance(other, (int, float)):
             return (self.x == other) and self.y == 0
 
     @vectorMethod
-    def __lt__(self, other):
+    def __lt__(self, other: "Vector") -> bool:
         return self.magnitude < other.magnitude
 
     @vectorMethod
-    def __le__(self, other):
+    def __le__(self, other: "Vector") -> bool:
         return self.magnitude <= other.magnitude
 
     @vectorMethod
-    def __ne__(self, other):
+    def __ne__(self, other: "Vector") -> bool:
         return not self == other
 
     @vectorMethod
-    def __gt__(self, other):
+    def __gt__(self, other: "Vector") -> bool:
         return self.magnitude > other.magnitude
 
     @vectorMethod
-    def __ge__(self, other):
+    def __ge__(self, other: "Vector") -> bool:
         return self.magnitude >= other.magnitude
     # </editor-fold>
 
     # <editor-fold desc="Object Conversions">
-    def __int__(self):
+    def __int__(self) -> int:
         return int(self.x)
 
-    def __complex__(self):
-        return complex(self.x, self.j)
+    def __complex__(self) -> complex:
+        return complex(self.x, self.y)
 
-    def __float__(self):
+    def __float__(self) -> float:
         return float(self.x)
+
     # <editor-fold desc="String Output/Printing">
-    def __str__(self):
-        return f"({int(self.x * 100) / 100},{int(self.y * 100) / 100});({int(self.magnitude * 100) / 100}<{int(self.θ * 100) / 100})"
+    def __str__(self) -> str:
+        return f"Vector: ({self.x:.2e},{self.y:.2e});({self.magnitude:.2e}<{self.θ:.2e})"
 
-    def __repr__(self):
-        return f"({int(self.x * 100) / 100},{int(self.y * 100) / 100});({int(self.magnitude * 100) / 100}<{int(self.θ * 100) / 100})"
+    def __repr__(self) -> str:
+        return f"Vector: ({self.x},{self.y});({self.magnitude}<{self.θ})"
     # </editor-fold>
     # </editor-fold>
 
 
-def θ2θp(θ):
+def θ2θp(θ: float) -> float:
     if θ < 0 or θ > 2 * math.pi:
         raise ValueError("θ must be between 0 and 2 pi")
     if θ == 0:
@@ -194,7 +205,7 @@ def θ2θp(θ):
     return 1 - 1 / math.log(θ / (2 * math.pi))
 
 
-def θp2θ(θp):
+def θp2θ(θp: float) -> float:
     if θp < 1:
         raise ValueError("θp must be greater than or equal to 1")
     if θp == 1:
@@ -207,36 +218,36 @@ class ImaginaryVector(Vector):
     # <editor-fold desc="Algebraic Operators">
     # <editor-fold desc="Multiplication/Division">
     @scalarMethod
-    def __mul__(self, other):
-        if isinstance(other, numbers.Number):
-            x = self.x * other
-            y = self.y * other
-            return self.__class__(x=x, y=y)
-        elif isinstance(other, Vector):
+    def __mul__(self, other: Union[Vector, "ImaginaryVector", int, float]) -> "ImaginaryVector":
+        if isinstance(other, Vector):
             x = self.x * other.x - self.y * other.y
             y = self.x * other.y + other.x * self.y
             return self.__class__(x=x, y=y)
+        elif isinstance(other, (int, float)):
+            x = self.x * other
+            y = self.y * other
+            return self.__class__(x=x, y=y)
 
     @scalarMethod
-    def __truediv__(self, other):
-        if isinstance(other, numbers.Number):
+    def __truediv__(self, other: Union[Vector, "ImaginaryVector", int, float]) -> "ImaginaryVector":
+        if isinstance(other, Vector):
+            numerator = self * ImaginaryVector(other.x, - other.y)
+            denominator = other.x * other.x + other.y * other.y
+            return self.__class__(x=numerator.x / denominator,
+                                  y=numerator.y / denominator)
+        elif isinstance(other, (int, float)):
             x = self.x / other
             y = self.y / other
             return self.__class__(x=x, y=y)
-        elif isinstance(other, Vector):
-            numerator = self * ImaginaryVector(other.x, - other.y)
-            denomenator = other.x * other.x + other.y * other.y
-            return self.__class__(x=numerator.x / denomenator,
-                                  y=numerator.y / denomenator)
     # </editor-fold>
     # </editor-fold>
 
     # <editor-fold desc="String Output/Printing">
-    def __str__(self):
-        return f"({int(self.x * 100) / 100},{int(self.y * 100) / 100}i);({int(self.magnitude * 100) / 100}<{int(self.θ * 100) / 100})"
+    def __str__(self) -> str:
+        return f"Imaginary Vector: ({self.x:.2e},{self.y:.2e}i);({self.magnitude:.2e}<{self.θ:.2e})"
 
-    def __repr__(self):
-        return f"({int(self.x * 100) / 100},{int(self.y * 100) / 100}i);({int(self.magnitude * 100) / 100}<{int(self.θ * 100) / 100})"
+    def __repr__(self) -> str:
+        return f"Imaginary Vector: ({self.x},{self.y}i);({self.magnitude}<{self.θ})"
     # </editor-fold>
 
 

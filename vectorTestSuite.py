@@ -1,10 +1,11 @@
-import builtins
 import random
 import vectorArithmetic
 import itertools
 import datetime
 import math
+import inspect
 from inspect import currentframe, getframeinfo
+from typing import Callable, Sequence
 
 global errLog
 global success
@@ -22,7 +23,7 @@ global expectedFailure
 expectedFailure = False
 
 
-def customAssertion(boolValue, assertionType):
+def customAssertion(boolValue: bool, assertionType: str) -> None:
     global expectedFailure
     if not boolValue:
         global success
@@ -47,7 +48,7 @@ def customAssertion(boolValue, assertionType):
             errLog.write("-" * 100 + "\n")
 
 
-def getVariableValues(callingFrame):
+def getVariableValues(callingFrame: "inspect.FrameInfo") -> set[str]:
     keys = []
     values = []
     for key, value in callingFrame.f_locals.items():
@@ -60,7 +61,7 @@ def getVariableValues(callingFrame):
     return (":".join((key, value)) for (key, value) in zip(keys, values))
 
 
-def testSystem():
+def testSystem() -> None:
     global success
     global runType
 
@@ -110,7 +111,7 @@ def testSystem():
         print("A failure occurred.  Check the error log: " + errLogFileName)
 
 
-def testNVectors(vecTypeList, randomFunc, n, valRange=(-10, 10)):
+def testNVectors(vecTypeList: Sequence, randomFunc: callable, n: int, valRange=(-10, 10)) -> None:
     for i in range(n):
         # <editor-fold desc="Planting Seeds">
         # we won't allow any of our vectors to be (0,0) but
@@ -148,7 +149,10 @@ def testNVectors(vecTypeList, randomFunc, n, valRange=(-10, 10)):
         # </editor-fold>
 
 
-def checkAddition(V1, V2, V3, V4):
+def checkAddition(V1: vectorArithmetic.Vector,
+                  V2: vectorArithmetic.Vector,
+                  V3: vectorArithmetic.Vector,
+                  V4: vectorArithmetic.Vector) -> None:
     # http://math2.org/math/algebra/basicidens.htm
     global expectedFailure
 
@@ -200,7 +204,10 @@ def checkAddition(V1, V2, V3, V4):
     # </editor-fold>
 
 
-def checkMultiplication(V1, V2, V3, V4):
+def checkMultiplication(V1: vectorArithmetic.Vector,
+                        V2: vectorArithmetic.Vector,
+                        V3: vectorArithmetic.Vector,
+                        V4: vectorArithmetic.Vector) -> None:
     # http://math2.org/math/algebra/basicidens.htm
     global absTol
     global relTol
@@ -310,7 +317,10 @@ def checkMultiplication(V1, V2, V3, V4):
     # </editor-fold>
 
 
-def checkExponentiation(V1, V2, V3, V4):
+def checkExponentiation(V1: vectorArithmetic.Vector,
+                        V2: vectorArithmetic.Vector,
+                        V3: vectorArithmetic.Vector,
+                        V4: vectorArithmetic.Vector) -> None:
 
     # https://mathinsight.org/exponentiation_basic_rules
 
@@ -493,7 +503,23 @@ def checkExponentiation(V1, V2, V3, V4):
         # </editor-fold>
 
 
-def checkIsomorphism(randomFunc, n, valRange=(-10, 10)):
+def checkLogarithm(V1: vectorArithmetic.Vector,
+                   V2: vectorArithmetic.Vector,
+                   V3: vectorArithmetic.Vector,
+                   V4: vectorArithmetic.Vector) -> None:
+
+    # https://mathinsight.org/logarithm_basics
+
+    for v in (V1, V2, V3):
+        # <editor-fold desc="Definition of Logarithm">
+        # If b^n=k, logb(k) = n
+        # we can only check this directly for b = E and logb = ln
+        if v.magnitude > 0:
+            customAssertion((vectorArithmetic.E ** v).ln() == v, "Definition of Logarithm")
+        # </editor-fold>
+
+
+def checkIsomorphism(randomFunc: Callable, n: int, valRange=(-10, 10)) -> None:
     for i in range(n):
         # <editor-fold desc="Planting Seeds">
         # we won't allow any of our vectors to be (0,0) but
