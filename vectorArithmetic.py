@@ -7,7 +7,7 @@ from typing import Union
 # objects of the correct subclass
 
 
-def vectorMethod(func) -> callable:
+def vectorMethod(func: callable) -> callable:
     def decorated(self, other, *args, **kargs):
         if isinstance(other, Vector):
             return func(self, other, *args, **kargs)
@@ -18,7 +18,7 @@ def vectorMethod(func) -> callable:
     return decorated
 
 
-def scalarMethod(func) -> callable:
+def scalarMethod(func: callable) -> callable:
     def decorated(self, other, *args, **kargs):
         if isinstance(other, Vector):
             return func(self, other, *args, **kargs)
@@ -33,7 +33,7 @@ class Vector:
     absTol = 1e-05
     relTol = 1e-05
 
-    def __init__(self, x=None, y=None, θ=None, magnitude=None):
+    def __init__(self, x: float = None, y: float = None, θ: float = None, magnitude: float = None):
         if (not (x is None)) and (not (y is None)):
             if (not (θ is None)) or (not (magnitude is None)):
                 raise TypeError("if x and y are specified neither θ nor magnitude may be specified.")
@@ -43,8 +43,10 @@ class Vector:
             if x == 0:
                 if y > 0:
                     self.θ = math.pi / 2
-                else:
+                elif y < 0:
                     self.θ = 3 * math.pi / 2
+                else:
+                    self.θ = 0
             else:
                 self.θ = math.atan(y / x) % (2 * math.pi)
             if x < 0:
@@ -96,7 +98,10 @@ class Vector:
     def __mul__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
             magnitude = self.magnitude * other.magnitude
-            θ = self.θ + other.θ
+            if magnitude == 0:
+                θ = 0
+            else:
+                θ = self.θ + other.θ
         elif isinstance(other, (float, int)):
             magnitude = self.magnitude * other
             θ = self.θ
@@ -117,7 +122,7 @@ class Vector:
         return self.__class__(magnitude=magnitude, θ=θ)
     # </editor-fold>
 
-    # <editor-fold desc="Exponentiation Natural Logarithm">
+    # <editor-fold desc="Exponentiation Logarithm">
     @scalarMethod
     def __pow__(self, other: Union["Vector", float, int]) -> "Vector":
         if isinstance(other, Vector):
@@ -137,6 +142,15 @@ class Vector:
         magnitude = math.log(self.magnitude)
         θ = - self.θ
         return self.__class__(magnitude=magnitude, θ=θ)
+
+    def log(self, other: "Vector") -> "Vector":
+        # if V1 ^ V3 = V2, logV1(V2) = V3
+        # if we have two vectors V1 and V2, LogV1(V2) = LN(V2) / LN(V1)
+        if self.magnitude == 0:
+            return NotImplemented
+        if other.magnitude == 0:
+            return NotImplemented
+        return other.ln() / self.ln()
     # </editor-fold>
     # </editor-fold>
 
@@ -152,7 +166,9 @@ class Vector:
         if isinstance(other, Vector):
             absTol = 1e-05
             relTol = 1e-05
-            return math.isclose(self.magnitude, other.magnitude, rel_tol=relTol, abs_tol=absTol)
+            magEql = math.isclose(self.magnitude, other.magnitude, rel_tol=relTol, abs_tol=absTol)
+            θEql = math.isclose(self.θ, other.θ, rel_tol=relTol, abs_tol=absTol)
+            return magEql and θEql
         elif isinstance(other, (int, float)):
             return (self.x == other) and self.y == 0
 
@@ -255,3 +271,8 @@ E = Vector(x=math.e, y=0)
 I = Vector(x=1, y=0)
 V0 = Vector(x=0, y=0)
 Ip = Vector(x=0, y=1)
+Ipi = Vector(x=0, y=math.pi)
+
+
+V1 = Vector(2, 4)
+V1 * V0

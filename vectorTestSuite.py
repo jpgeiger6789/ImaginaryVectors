@@ -5,7 +5,7 @@ import datetime
 import math
 import inspect
 from inspect import currentframe, getframeinfo
-from typing import Callable, Sequence
+from typing import Sequence
 
 global errLog
 global success
@@ -39,6 +39,7 @@ def customAssertion(boolValue: bool, assertionType: str) -> None:
             codeContext = frameInfo.code_context[0]
             statementStart = codeContext.find("customAssertion(")
             statement = codeContext[statementStart + len("statementStart") + 2:-2]
+            statement = str(statement)
             keyValuePairs = getVariableValues(callingFrame)
             errLog.write("-" * 100 + "\n")
             errLog.write(f"{assertionType}; {runType}; Expected? {expectedFailure}\n")
@@ -97,14 +98,14 @@ def testSystem() -> None:
                  random.randint, n, valRange)
     # </editor-fold>
 
-
-    # <editor-fold desc="Check Vector Isomorphism to Imaginary Algebra">
+    # <editor-fold desc="Check Vector Isomorphism and Vector Theory">
     # Ensure vector algebra is isomorphic to imaginary algebra
-    runType = "Real Vector->Imaginary Isomorphism"
-    checkIsomorphism(random.uniform, n, valRange)
-    runType = "Integer Vector->Imaginary Isomorphism"
-    checkIsomorphism(random.randint, n, valRange)
-    # </editor-fold>
+    runType = "Real Vector->Imaginary Isomorphism, Vector Theory"
+    checkIsomorphismAndVectorTheory(random.uniform, n, valRange)
+    runType = "Integer Vector->Imaginary Isomorphism, Vector Theory"
+    checkIsomorphismAndVectorTheory(random.randint, n, valRange)
+    # </editor-fold
+
     if success:
         print("Tests Completed Successfully")
     else:
@@ -146,6 +147,7 @@ def testNVectors(vecTypeList: Sequence, randomFunc: callable, n: int, valRange=(
         checkAddition(V1, V2, V3, V4)
         checkMultiplication(V1, V2, V3, V4)
         checkExponentiation(V1, V2, V3, V4)
+        checkLogarithm(V1, V2, V3, V4)
         # </editor-fold>
 
 
@@ -184,9 +186,9 @@ def checkAddition(V1: vectorArithmetic.Vector,
 
     # <editor-fold desc="Definition of Subtraction">
     # a - b = a + (-b) subtraction
-    customAssertion(V1 - V2 == V2 + (-V1), "Definition of Subtraction")
-    customAssertion(V2 - V3 == V3 + (-V2), "Definition of Subtraction")
-    customAssertion(V1 - V3 == V3 + (-V1), "Definition of Subtraction")
+    customAssertion(V1 - V2 == V1 + (-V2), "Definition of Subtraction")
+    customAssertion(V2 - V3 == V2 + (-V3), "Definition of Subtraction")
+    customAssertion(V1 - V3 == V1 + (-V3), "Definition of Subtraction")
     # </editor-fold>
 
     # <editor-fold desc="Additive Isomorphism to Scalar Algebra">
@@ -510,6 +512,21 @@ def checkLogarithm(V1: vectorArithmetic.Vector,
 
     # https://mathinsight.org/logarithm_basics
 
+    # <editor-fold desc="Logarithm of E Rule">
+    # ln(e) = 1
+    customAssertion(vectorArithmetic.E.ln() == 1, "Logarithm of E Rule")
+    # </editor-fold>
+
+    # <editor-fold desc="Logarithm of 1 Rule">
+    # ln(1) = 0
+    customAssertion(vectorArithmetic.I.ln() == 0, "Logarithm of 1 Rule")
+    # </editor-fold>
+
+    # <editor-fold desc="Logarithm of 1p Rule">
+    # ln(1) = 0
+    customAssertion(vectorArithmetic.Ip.ln() == 0, "Logarithm of 1p Rule")
+    # </editor-fold>
+
     for v in (V1, V2, V3):
         # <editor-fold desc="Definition of Logarithm">
         # If b^n=k, logb(k) = n
@@ -518,8 +535,49 @@ def checkLogarithm(V1: vectorArithmetic.Vector,
             customAssertion((vectorArithmetic.E ** v).ln() == v, "Definition of Logarithm")
         # </editor-fold>
 
+        # <editor-fold desc="Indirect Definition of Logarithm">
+        # If b^n=k, logb(k) = n
+        # we can check this indirectly using the change of base rule: LogW(K) = LN(K) / LN(W)
+        # therefore, if we have two vectors V1 and V2, LogV1(V2) = LN(V2) / LN(V1)
+        # this is implemented internally in our Vector type
+        if v.magnitude > 1 and V4.magnitude > 0:
+            t = v ** V4
+            try:
+                customAssertion(v.log(V4) == t, "Indirect Definition of Logarithm")
+            except:
+                pass
+        # </editor-fold>
 
-def checkIsomorphism(randomFunc: Callable, n: int, valRange=(-10, 10)) -> None:
+        # <editor-fold desc="Logarithm Product Rule">
+        # ln(xy) = ln(x) + ln(y)
+        if v.magnitude > 0 and V4.magnitude > 0:
+            t = v * V4
+            customAssertion(t.ln() == v.ln() + V4.ln(), "Logarithm Product Rule")
+        # </editor-fold>
+
+        # <editor-fold desc="Logarithm Quotient Rule">
+        # ln(x/y) = ln(x) - ln(y)
+        if v.magnitude > 0 and V4.magnitude > 0:
+            t = v / V4
+            customAssertion(t.ln() == v.ln() - V4.ln(), "Logarithm Quotient Rule")
+        # </editor-fold>
+
+        # <editor-fold desc="Logarithm of Power Rule">
+        # ln(x^y) = y * ln(x)
+        if v.magnitude > 0 and V4.magnitude > 0:
+            t = v ** V4
+            customAssertion(t.ln() == V4 * v.ln(), "Logarithm of Power Rule")
+        # </editor-fold>
+
+        # <editor-fold desc="Logarithm of Reciprocal Rule">
+        # ln(1/x) = -ln(x)
+        if v.magnitude > 0:
+            t = v * V4
+            customAssertion((vectorArithmetic.I / t).ln() == -(t.ln()), "Logarithm of Reciprocal Rule")
+        # </editor-fold>
+
+
+def checkIsomorphismAndVectorTheory(randomFunc: callable, n: int, valRange=(-10, 10)) -> None:
     for i in range(n):
         # <editor-fold desc="Planting Seeds">
         # we won't allow any of our vectors to be (0,0) but
@@ -541,6 +599,16 @@ def checkIsomorphism(randomFunc: Callable, n: int, valRange=(-10, 10)) -> None:
         y4 = randomFunc(valRange[0], valRange[1])
         while y4 == 0:
             y4 = randomFunc(valRange[0], valRange[1])
+        randInt1 = random.randint(-5, 5)
+        randInt2 = random.randint(-5, 5)
+        randInt3 = random.randint(-5, 5)
+        randInt4 = random.randint(-5, 5)
+        randInts = [randInt1, randInt2, randInt3, randInt4]
+        randFloat1 = random.randrange(-5, 5)
+        randFloat2 = random.randrange(-5, 5)
+        randFloat3 = random.randrange(-5, 5)
+        randFloat4 = random.randrange(-5, 5)
+        randFloats = [randFloat1, randFloat2, randFloat3, randFloat4]
         # </editor-fold>
 
         # <editor-fold desc="Creating Vectors">
@@ -588,7 +656,7 @@ def checkIsomorphism(randomFunc: Callable, n: int, valRange=(-10, 10)) -> None:
         customAssertion(vectorArithmetic.E ** V4 == vectorArithmetic.E ** I4, "Exponentiation Isomorphism - E")
         # </editor-fold>
 
-        # <editor-fold desc="Binary Operation Isomorphism">
+        # <editor-fold desc="Binary Operation Isomorphism, Vector Theory">
         for (i, j) in itertools.combinations(range(4), 2):
             Vi = vectors[i]
             Vj = vectors[j]
@@ -596,13 +664,44 @@ def checkIsomorphism(randomFunc: Callable, n: int, valRange=(-10, 10)) -> None:
             Ij = imaginaryVectors[j]
 
             customAssertion(Vi + Vj == Ii + Ij, "Addition Isomorphism")
+            customAssertion(Vi + Vj.x == Vi + vectorArithmetic.Vector(Vj.x, 0), "Real Number Addition Isomorphism")
             customAssertion(Vi - Vj == Ii - Ij, "Subtraction Isomorphism")
+            customAssertion(Vi - Vj.x == Vi - vectorArithmetic.Vector(-Vj.x, 0), "Real Number Subtraction Isomorphism")
             customAssertion(Vi * Vj == Ii * Ij, "Multiplication Isomorphism")
+            customAssertion(Vi * Vj.x == Vi * vectorArithmetic.Vector(-Vj.x, 0), "Real Number Multiplication Isomorphism")
             try:
                 customAssertion(Vi / Vj == Ii / Ij, "Division Isomorphism")
             except ZeroDivisionError:
                 pass
+            try:
+                customAssertion(Vi / Vj.x == Vi / vectorArithmetic.Vector(-Vj.x, 0), "Real Number Division Isomorphism")
+            except ZeroDivisionError:
+                pass
             customAssertion(Vi ** Vj == Ii ** Ij, "Exponentiation Isomorphism")
+            customAssertion(Vi ** Vj.x == Vi ** vectorArithmetic.Vector(-Vj.x, 0), "Real Number Exponentiation Isomorphism")
+
+            customAssertion(Vi ** Vj == Vi ** vectorArithmetic.Vector(0, Vj.y), "Nonrotation from ignoring the x vector")
+            for x in randInts:
+                customAssertion(Vi ** Vj == Vi ** vectorArithmetic.Vector(x, Vj.y), "Nonrotation from ignoring the x vector")
+            for x in randFloats:
+                customAssertion(Vi ** Vj == Vi ** vectorArithmetic.Vector(x, Vj.y), "Nonrotation from ignoring the x vector")
+            for (x, y) in itertools.combinations(randInts, 2):
+                B = vectorArithmetic.Ip * x
+                C = vectorArithmetic.Ip * y
+                customAssertion(((Vi ** B) ** C).θ == Vi.θ, "Nonrotation from double exponentiation")
+
+            # <editor-fold desc="Definition of Vector Exponentiation">
+            # For any two scalars n and m, n^m / n*m = n^(m-1) / m
+            # Therefore, for any two vectors V and W, V ^ W / V * W = V ^ (W - I) / W
+            customAssertion((Vi ** Vj) / (Vi * Vj) == ((Vi ** (Vj - vectorArithmetic.I)) / Vi), "Definition of Vector Exponentiation")
+            # </editor-fold>
+
+            # <editor-fold desc="Definition of Vector Exponentiation">
+            # For any two scalars n and m, n^m / n*m = n^(m-1) / m
+            # Therefore, for any two vectors V and W, V ^ W / V * W = V ^ (W - I) / W
+            customAssertion((Vi ** Vj) / (Vi * Vj) == ((Vi ** (Vj - vectorArithmetic.I)) / Vi), "Definition of Vector Exponentiation")
+            # </editor-fold>
+
         # </editor-fold>
 
 
@@ -611,5 +710,5 @@ if __name__ == "__main__":
     timestamp = datetime.datetime.now()
     errLogFileName = f"outputlog {timestamp.year}.{timestamp.month:02}.{timestamp.day:02}...{timestamp.hour:02}.{timestamp.minute:02}.{timestamp.second:02}.txt"
 
-    with open(errLogFileName, "w") as errLog:
+    with open(errLogFileName, "w", encoding="utf-8") as errLog:
         testSystem()

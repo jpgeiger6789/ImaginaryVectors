@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0512a31f-b692-438a-a1c3-d9285c29dbea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OldTestFiles/oldtheory.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputlog 2021.08.10...11.39.38.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VectorTheory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VectorTheory.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputlog 2021.08.10...06.22.05.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vectorArithmetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorArithmetic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vectorTestSuite.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorTestSuite.py" afterDir="false" />
     </list>
@@ -17,6 +20,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1wWLmOzrLut6E5WBX4sxxnGUg8l" />
   <component name="ProjectLevelVcsManager">
@@ -103,6 +114,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

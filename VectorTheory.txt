@@ -6,6 +6,13 @@ number?
 
 Let's consider an imaginary number to be simply a vector Vi = (x, y)
 
+-----------------------------------------------------------------------
+            VECTOR-VECTOR ADDITION & SUBTRACTION DEFINITION
+-----------------------------------------------------------------------
+If V1 = (a, b) and V2 = (c, d), and I1 = (a, bi) and I2 = (c, di),
+How does V1 + V2 relate to I1 + I2?
+How does V1 - V2 relate to I1 - I2?
+These questions are equivalent to the following:
 How does (a, b) + (c, d) correlate to (a, bi) + (c, di)?
 How does (a, b) - (c, d) correlate to (a, bi) - (c, di)?
 
@@ -13,12 +20,15 @@ These are obviously isomorphic.  It's less obvious however, how to create
 vector multiplication and division functions which are isomorphic to
 imaginary arithmetic.
 
+--------------------------------------------------------------------------
+                         IDENTITY VECTORS
+--------------------------------------------------------------------------
 I'll stop here to note that we must define a 0 vector and an identity vector,
 which must satisfy the properties:
 V0 + X = X for all X
 I * X = X * I for all X
 
-For convenience sake, we will define an alternative identity vector
+For convenience's sake, we will define an alternative identity vector
 I' to simplify the shorthand of defining a vector with only a complex component.
 We will write this as I'; in truth, this is just a complex vector
 C = [0, iθ].
@@ -26,110 +36,257 @@ C = [0, iθ].
 The zero vector is easy; it is simply the vector (0, 0).  As will be seen
 later when we define our system of multiplication, the identity vector will
 be (1, 0) (this tends to be true when we map scalar values onto our
-vector field - our scalars will usually be mapped onto the complex plane
-by setting its complex, or y value, to 0.
+vector field - a scalar will usually be mapped onto the complex plane
+by setting its complex, or y value, to 0)
+
+--------------------------------------------------------------------------
+                   SCALAR MULTIPLICATION ISOMORPHISM
+--------------------------------------------------------------------------
 
 We must define a system of vector multiplication whereby:
-(a, b) x (c, d) is isomporphic to (a, bi) * (c, di)
-(a, b) / (c, d) is isomorphic to (a, bi) / (c, di)?
+V1 * V2 is isomorphic to I1 * I2
+V1 / V2 is isomorphic to I1 / I2
 
 We'll need to define a new type of vector multiplication.
 It won't be the dot product, since that returns a scalar.
 It won't be the cross product, since that returns a vector perpendicular
-to the two vectors, and we want a method that returnsa vector in the
+to the two vectors, and we want a method that returns a vector in the
 same plane.
 
+--------------------------------------------------------------------------
+              VECTOR-VECTOR MULTIPLICATION ISOMORPHISM CHECK
+--------------------------------------------------------------------------
 
 We would like our vector multiplication to meet the following requirement:
 if X = V * W, |X| = |V| * |W|
 
-Therefore, let's define the vector multiplication to have this property:
-if X = V * W, |X| = |V| * |W|
+--------------------------------------------------------------------------
+              VECTOR-VECTOR MULTIPLICATION
+--------------------------------------------------------------------------
 
-For the angle, we need to consider the fact that the vector [I' * i] will
+Let us investigate vector-vector multiplication and see whether it is,
+in fact, isomorphic to vector-scalar multiplication.
+
+For the angle, we need to consider the fact that the vector I' will
 never scale our vector.  It will, however rotate it by 90 degrees.
-This can be seen from R = C * I':  (n, mi) * (0, i) = (-m, ni).
-R can be seen to have the same magnitude as C, but with a 90 degree rotation.
-In general, the angular change from multiplication works out to be
-dθ = abs(θX - θV) (we only ever rotate one way), and thus we have a
-firm definition of vector multiplication in our system:
-V * W = X; in polar coordinates, X = |V| * |W| < min(θX, θV) + abs(θX - θV)
-This can much more simply be written as X = |V| * |W| <  θX + θV
+This can be seen from I1 * I' = I2:  (a, bi) * (0, i) = (-b, ai).
+I2 can be seen to have the same magnitude as I1, but with a 90 degree rotation.
 
-Since we constrained the angular output of our multiplication to match
-what happens in the complex numbers, this vector definition is exactly
-isomorphic to imaginary algebra.
+We can also see that any purely real vector will never rotate our vector.
+It will, however, scale it by its magnitude
+This can be seen from I1 * I' = I2:  (a, bi) * (c, 0) = (c * a, c * bi)
+02 = atan(c * b / c * a) = atan(b / a) = 01
+
+Next, since (A * B) * C = A * (B * C),
+if B = (n, 0) and C = I'
+(A * B) * C = A scaled by n and rotated by 90 degrees.
+However, (B * C) = (0, ni)
+Therefore, A * (0, ni) will scale A by n and rotate it by 90 degrees.
+Therefore, multiplication of a purely complex vector will rotate by 90 degrees
+and scale by the magnitude.
+
+Finally, let us look at  A * (B + C) where B = (n, 0) and C = (0, mi)
+A * (B + C) = A * B + A * C
+A * B = A scaled by n
+A * C = A scaled by m and rotated by 90 degrees
+These two vectors summed together form a right triangle whose magnitude is |A| * (m^2 + n^2) ^ /.5
+and whose angle is 0a + atan(m / n)
+
+However, if we define a vector D = B + C, we will find that |D| = (m^2 + n^2) ^ /.5 and 0d = atan(m / n)
+
+This gives us a definition of the multiplication of two vectors:
+
+--------------------------------------------------------------------------
+             VECTOR-VECTOR MULTIPLICATION - DEFINITION
+--------------------------------------------------------------------------
+A * B = C where |C| = |A| * |B| and 0c = 0a + 0b
+
+
+
+Since we constrained the output of our multiplication to match
+what happens in the complex numbers, this definition of vector multiplication
+is exactly isomorphic to the multiplication of complex numbers.
+
+And, if we look earlier in our derivation, we can see that this has the
+property we were hoping for - namely, that the magnitude output of this
+function is the same as the magnitude output of scalar-scalar multiplication.
+
+
+--------------------------------------------------------------------------
+                 VECTOR-VECTOR DIVISION - DEFINITION
+--------------------------------------------------------------------------
 
 How would division work in such a system?
 if V3 = V1 * V2, then V3 / V1 = V2 and V3 / V2 = V1
 
 What operation gives this?  Simply the reverse of multiplication:
-V3 / V1 = |V3| / |V1| < θ3 - θ1
+For any X = V / W:
+|X| = |V| / |W|
+θX = θV - θW mod 2pi
+
+--------------------------------------------------------------------------
+                VECTOR-SCALAR MULTIPLICATION DEFINITION
+--------------------------------------------------------------------------
 
 From this, scalar multiplication and division of a vector are simple (once
 again, we can consider scalar multiplication and division as complex
-multiplication and division with a complex value of 0
+multiplication and division with a complex value of 0, or you can look at
+multiplication of a scalar with a complex number to convince yourself this
+is true
 
-W = V * x; |W| = |V|* x; θW = θV
+W = V * x; |W| = |V| * x; θW = θV
 W = V / x; |W| = |V| / x; θW = θV
 
-This method of multiplication division is in fact isomorphic to complex
-multiplication and division.
+Thus, both vector and scalar multiplication/division operations are
+isomorphic to complex multiplication/division.
 Great!  We've come up with a mapping from complex numbers to vectors, as
 we had hoped.
 
-How about scalar exponentiation of our vectors?
-For a vector raised to a positive integer n,  this will be simply a
-vector multiplied by itself n times.  But what about  non-integers
-and negative numbers?
+--------------------------------------------------------------------------
+                VECTOR-SCALAR EXPONENTIATION
+--------------------------------------------------------------------------
 
-Our implementation must meet all the algebraic requirements of
-an exponentiation system
+From vector-scalar multiplication and division, we can easily move to
+vector-scalar exponentiation.
+First, let's consider the definition of scalar exponentiation.
+
+For a vector V raised to a positive integer n, this will simply be
+(V * V * V * ... * V) where the multiplication happens n times.
+
+I will copy again our definition of vector multiplication:
+For two vectors V and W multiplied together, we get a resulting vector X
+defined as follows:
+V * W = X
+|X| = |V| * |W|
+θX  = θV + θW mod 2pi
+
+From our definition of vector multiplication (copied above), we can see that the
+definition for vector exponentiation by a scalar is as follows:
+
+--------------------------------------------------------------------------
+                VECTOR-SCALAR EXPONENTIATION DEFINITION
+--------------------------------------------------------------------------
+If W = V ^ n:
+|W| = |V| ^ n
+θw = θv * n mod 2pi
+
+
+
+--------------------------------------------------------------------------
+                    VECTOR-VECTOR EXPONENTIATION
+--------------------------------------------------------------------------
+
+Since we have defined Vector-Vector multiplication and division, we can define Vector-Vector
+exponentiation.  There are an infinite number of ways to define exponentiation
+that satisfy the minimum rules of a consistent algebraic system, but we would like to choose
+one that "feels" like regular scalar exponentiation.  To do this, we will hold our system to
+the following constraint:
+
+1.) Magnitude of an exponentiation:
+Exponentiation of a vector by another vector will amplify the magnitude of the resulting
+vector equally to the exponentiation of the two magnitudes.
+If W = X^V, |W| = |X| ^ |Y|
+
+2.) Equivalence to scalar exponentiation:
+For any two scalars n and m, n^m / n*m = n^(m-1) / m
+Therefore, for any two vectors V and W, we will define our system such that
+(V ^ W) / (V * W) = (V ^ (W - I) ) / W
+
+Let's first look at W = n * I where n is any real number
+If X = (V ^ W) / (V * W),
+then X = (V ^ (W - I) ) / W
+Let's define X' = (V ^ (W - I) )
+Then X = X' / W
+Further, since X' = (V ^ (W - I) ), X' = (V ^ (m * I) )
+where m = n - 1
+
+We will again use the angle rule for vector division:
+For any X = V / W:
+θX = θV - θW (we can hold off the modulus until the end)
+For our system, θX = θX' - θW
+However, if W = n * I, θW = 0
+Therefore, θX = θX'
+This step can be recursed to show that for any system of the form
+X = V ^ (n * I), X' = V ^ (m * I), n = m + i where n is any real number and i is any integer (alternatively
+defined as n % 1 == m % 1; the decimal value of each is equivalent),
+θX = θX'
+
+
+This shows that exponentiation within this system of numbers with no complex component
+creates no rotation (this is isomorphic to exponentiation of real numbers)
+
+
+Since we know how division by a vector affects rotation, this gives us a definition
+of exponentiation that we can use to define rotation.
+If A = B ^ C, then
+A' = B ^ C / (B * C)
+A' = (B ^ (C - I)) / C
+A' / A = C
+
+Since division of vectors results in simple subtraction of angles, we can say
+θA' =  θA - θC
+θA - θA' = θC
+
+
+
+Furthermore, since A^(B+C) = A^B * A^C,
+If we say X=A^B and Y=A^C
+θA  = θX + θY
+However, if C=n*I, θY=θA
+
+
+
+so θA = θX
+Therefore, for any vector B=n*I', and any other vector C=m*I', where n and m are real numbers,
+A^(B+C) = A^B * A^Z
+θA = θA^B
+Therefore, for rotation, we can totally ignore the real component of the exponentiation!
+in other words,
+If A = B^C and C'=(0, Cy), or D = (n, Cy), where n is any real number,
+A^C = A^C' = A^D
+This is totally crazy!  But my test results show this to be true.
+
+From here, we can finally fully define rotation from vector exponentiation:
+A^(B) = A^(B') = A^(B+n*I) where B'=I'*By and n is any real number
+(A^B)^C = A^(B*C)
+θ[(A^B)^C] = θ[A^(B*C)]
+if B=n*I' and C=m*I' (we can ignore the real components of these vectors)
+B*C=n*m*I'*I'=-n*m*I
+So if V=A^B^C:
+A^B^C=A^(B*C)=A^(-n*m*I)
+θV=0A
+This is also crazy!  It says that whenever there is rotation from vector exponentiation, if it happens twice,
+it goes back to 0.
+This means...in our system, if A^B = C,  θC = θA + pi if B has an imaginary component, and θC = θA otherwise.
+What a strange coincidence!  Exponentiation either rotates the vector by a half turn or not at all!
+However, my test results do not like this...I'll need to think more about it.
+
+Now, let's look at C = n * I':
+θA' =  θA - θC
+θA' =  θA - n * θI'
+θA' =  θA - pi / 4
+θA - θA' = pi / 4
+Th
+
+Since division of vectors results in simple subtraction of angles, we can say
+that if W = X ^ Y, θW is equal to θW = θX * (θY - 1) - θY
+
+To test if this is a valid interpretation, we must prove that our implementation
+meets all the algebraic requirements of an exponentiation system:
 https://mathinsight.org/exponentiation_basic_rules
 
-For a vector V1 squared, the angle of the resulting vector V2 will be
-θ2 = θ1 * 2 (multiplication is just addition to the nth power)
-Therefore, when taking the square root of a vector V1, the angle
-of the resulting vector V2 will be
-θ2 = θ1 / 2
-For a vector V1 cubed the angle of the resulting vector V2 will be
-θ2 = θ1 * 3
-Therefore, when taking the cubic root of a vector V1, the angle
-of the resulting vector V2 will be
-θ2 = θ1 / 3
-We can extrapolate to say that for a vector V1 raised to a real
-power r, the angle of the resulting vector V2 will be
-θ2 = θ1 * r
-
-Therefore, we can say define vector exponentiation by a scalar is defined
-as follows:
-V^n = |V|^n < θ*n
-
-We'll need to define vector exponentiation by a vector next.
-
-We would like our exponentiation to meet the following requirement:
-If W = X^V, we would like the magnitude of our resulting vector
-to be equal to the scalar exponentiation of the two operands:
-|W| = |X| ^ |Y|
-
-For the angle, we can recognize that exponentiation is just multiplication...
-multiplied. In particular, for n and m, n^m / n*m = n^(m-1) / m
-given that division of vectors results in simple subtraction of angles, we can say
-that if W = X ^ Y, θW will look something like θW = θX * (θY - 1) - θY
-We will use this as an operating definition until we have something better
-to go off of.
+Our test suite does in fact prove this.
 
 Finally, we need to implement a logarithm, which is the inverse of the
-exponentiation.  It must have the followign properties:
-https://mathinsight.org/logarithm_basics
+exponentiation.
 
 If X^V = W, the logarithm is defined as follows:
 logX(W) = V
 
-We already know what X^V will be:
+We already know how to determine X^V:
 W = |X| ^ |V| < θX * (θY - 1) - θY
 
-What is a fucntion, which given this input, will give the correct output?
+What is a function, which given this input, will give the correct output?
 
 Let's see what happens when one of these is the E vector:
 If E ^ V = W, the natural logarithm is defined as follows:
@@ -144,258 +301,7 @@ W = |E| ^ |V| < - θV
 From here, it is obvious what the LN operator needs to be:
 LN(W) = ln(|W|) < - θW
 
-I have not yet put together a test procedure for this, but I am quite
-confident that this is correct.
+Our logarithm must meet the basic requirements for logarithms:
+https://mathinsight.org/logarithm_basics
 
-
-However, since all logarithms can be defined using base trasnformations, from
-an arbitrary base, we only need to define a single logarithmic function, from
-which any other logarithmic function could be generated.
-We will define the natural logarithm, since it's the most useful.
-
-First, we will attempt to define a vector E which is isomorphic to the scalar
-e in this system.
-define exp(V) as the sum from k = 0 to infinity of V^k / k!:
-exp(V) = I + V + V^2/2! + V^3/3! + ...
-E = exp(I) =  I * Σ(1/k)! from k = 0 to infinity
-however, Σ(1/k)! from k = 0 to infinity is the definition of the scalar e.
-Therefore, in our system, E = e * I
-This is exactly what you would expect - as usual, our scalar mapping is
-simply a complex number with 0 imaginary part.
-
-
-
-We will now explore in depth what it means to raise a vector to the power of another vector
-(or a complex number to the power of another complex number)
-
-We will be trying to come up with a conceptual and mathematical model that defines the following:
-W ^ Z = K
-Where W, Z, and K are vectors (or complex numbers)
-
-We will use the definition of a logarithm to get there.
-
-Strap in, this one's a doozy!!  This is the entire purpose of this exercise and it is
-freakin' complicated.  If anyone does end up reading this, I hope it helps you conceptualize
-what it even means to raise a vector to the power of another vector.
-
-I've tried to use uppercase letters to indicate Vectors and Vector Operands
-and lowercase letters to indicate scalars and scalar operands.  I may have not done
-this perfectly.
-
-What is a logarithm?  It's a function such that
-logb(b^x) = x
-
-For a complex number raised to an integer power, this means that
-logw(W ^ n) = n
-
-For example:
-If  W = (1, 3i) and n = 2,  W ^ n = (-8, 8i)
-Since Logw(W ^ n) = n, we know that logw(-8, 8i) = 2
-
-let W = (wx + wyi)
-let Z = (zx + zyi)
-let W^Z = K
-What is K?
-
-LogW(W^Z) = Z                                      <<definition of a logarithm
-LogW(W^Z) = logW(K)                                <<W ^ Z = K
-LogW(K) = Z                                        <<simple substitution
-LogW(K) = LogE(K) / LogE(W)                        <<change of base rule: logb(x) = logd(x)/logd(b)
-LogW(K) = LN(K) / LN(W)                            <<Instead of base W, we now use base E
-LogW(K) * LN(W) = LN(K)                            <<multiplication by LN(W)
-LN(K) = LogW(K) * LN(W)                            <<rearranging
-K = E^[LogW(K)*LN(W)]                              <<raise both sides to an exponent
-K = E ^ [Z    *LN(W)]                              <<substitution
-W^Z = E^[Z*LN(W)]                                  <<substitution
------------------------------------------------------------------------------------
-W' = LN(W)                                         <<defining a new term W'
-E^(W') = W                                         <<E^LN(X)= X
-Suppose W = (I*Rw)*E^(I'*θw)                       <<good guess from the guys who know the answer
------------------------------------------------------------------------------------
-Then W' = LN[(I*Rw)*E^(I'*θw)]                     <<substitution
-W' = LN(I*Rw) + LN(E^(I'*θw))                      <<Ln(A*B) = Ln(A)+Ln(B)
-W' = LN(I*Rw) + I'*iθw				   <<Ln(E^(x)) = I*x
-W = E^(W')					   <<copied from above
-W = E^[LN(I*Rw) + I'*θw]                           <<substituting W'
-W = [E^LN(I*Rw)]*[E^(I'*θw)]                       <<X^(A+B) = (X^A)*(X^B)
-W = (I*Rw)*E^(I'*θw)				   <<E^LN(X) = X
-W^Z = [(I*Rw)*E^(I'*θw)]^Z                         <<Exponentiating the above line by the vector Z
-W^Z = E^[Z*LN(W)]                                  <<copied from the line before we defined W'
-W^Z = E^[Z]*E^[LN(W)]                              <<X^(A+B) = (X^A)*(X^B)
-W^Z = E^[Z]*W                                      <<E^LN(W) = W
-^^need to look more closely at this.  Seems wrong.
-
-W^Z = E^[Z]*(I*Rw)*E^(I'*θw )                      <<W = (I*Rw)*E^(I*iθw)
-W^Z = (I*Rw)*E^[Z]*E^(I'*θ w)                      <<rearranging
-W^Z = (I*Rw)*E^(Z + I'*θw )                        <<(X^A)*(X^B) = X^(A+B)
-W^Z = K
-
-K = (I*Rw)*E^(Z + I'*iθw)
-We've now redefined exponentiation in terms of an exponential function.
-
-If we can define our exponential function, we can have a well-defined system of exponentiation.
-
-Once again, we would like to have a system such that
-|W ^ Z| = |W| ^ |Z|
-We will allow this to be a definition and see if we can calculate a value for the angular change of this
-system.
-
-From an intuitive perspective, what does the below function tell us?
-K = (I*Rw)*E^(Z + I'*iθw)
-
-Let's look only at the magnitude.  I will revert to a more familiar scalar notation.
-let's use the form Rk = |K|
-then, if we define Q = Z + (I' * iθw), we have a nice scalar equivalency:
-Rk=Rw*(Re)^(Rq)
-
-Here, Q = (Zx, Zy + θw)
-Rq = (Zx^2 + (Zy + θw)^2)^.5
-
-Since we know W and Z, this is well-defined:
-Rk = Rw * Re ^ Rq
-
-Further, the exponentiation is "recursively" defined in terms of the exponentiation of the natural logarithm:
-W^X = Rw * E ^ Q
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-I'm not using this anymore but I worked hard on it and don't want to lose it.
-
-Conceptually, vector multiplication is simply scalar multiplication of the
-magnitude combined with scalar addition of the angle.  Therefore, we can
-exponentiate the magnitude using normal methods.
-For fractional powers divisible by 2, we will allow the angle to be rotated
-by pi radians / 180 degrees.
-This is conceptually similar
-to the idea that (n^2)^.5 = +/- n
-For the angle, we should consider what happens when we take the square root
-of a squared vector, and the third root of a cubed vector, etc., and see if
-we can extrapolate from there.
-
-For a vector V1 squared, the angle of the resulting vector V2 will be
-θ2 = θ1 * 2 (multiplication is just addition to the nth power)
-Therefore, when taking the square root of a vector V1, the angle
-of the resulting vector V2 will be
-θ2 = θ1 / 2
-For a vector V1 cubed the angle of the resulting vector V2 will be
-θ2 = θ1 * 3
-Therefore, when taking the cubic root of a vector V1, the angle
-of the resulting vector V2 will be
-θ2 = θ1 / 3
-We can extrapolate to say that for a vector V1 raised to a real
-power r, the angle of the resulting vector V2 will be
-θ2 = θ1 * r
-
-Therefore, we can say that vector exponentiation follows the following
-rules:
-If |n| > 1 or 1/n is not divisible by 2:
-V^n = |V|^n < θ*n
-If 0 < |n| < 1 and (1/n) is divisible by 2:
-V^n = |V|^n < θ*n or |V|^n < θ*n + pi
-This can awkwardly but more correctly be written:
-V^2 = |V|^n < θ*n - pi/2 +/- pi/2
-
-Given that the multiplication of vectors in this manner is isomorphic
-to multiplication of imaginary numbers, we can use the same formula
-to calculate the exponentiation of imaginary numbers.
-
-What about raising a vector to the power of a vector?
-
-Intuitively, the magnitude of one would be raised to the magnitude of the other.
-
-That is because the magnitude of a vector is an unbounded real number.
-
-However, the angle is a real number bounded between 0 and 2pi (6.28).  We would like
-the output of our angle exponentiation to be an unbounded number which we will
-then convert back to an angle between 0 and 2pi.  We can possibly do this
-by considering the angle as an exponentiation of some base angle, but we'll
-want to see how that works for the magnitude and see if we can find a good
-parallel.
-
-What if we consider our individual magnitudes as exponents from a common base e?
-M1 = e^X1
-M2 = e^X2
-X1 = ln(M1)
-X2 = ln(M2)
-Then, M1 ^ M2 = (e ^ X1) ^ (e ^ X2)
-
-However, we can also calculate this in a simpler fashion, without calculating
-X1 and X2:
-logM1(M1 ^ M2) = M2
-logB(x) = logD(x) / logD(B)
-ln(M1 ^ M2) = logM1(M1 ^ M2) / ln(M1)
-e^(ln(M1 ^ M2)) = e^(logM1(M1 ^ M2) / ln(M1))
-M1 ^ M2 = e^(logM1(M1 ^ M2) / ln(M1)
-M1 ^ M2 = e^(M2 / ln(M1))
-
-What about the angle?
-
-Let's assume that an angle of 0 corresponds to a "magnitude" of 1 - this means
-that the angle should not shift at all.
-Let's assume that an angle of 2 * pi corresponds to a "magnitude" of infinity -
-this means that the angle will shift as much as it possibly can.
-We need a mapping that takes the numbers 0 -> 2 * pi and translates them to
-1 -> infinity.
-Investigating several options, the simplest is below:
-θ'=1-1/ln(θ/2pi)
-Now that we have a mapping from 1 -> infinity, we can do exponentiation:
-θ'result = θ'1 ^ θ'2
-Finally, we will map backwards from θ' to θ - we will need to map
-the numbers 1->infinity back to 0->2*pi:
-θ'=1-1/ln(θ/2pi)
-ln(θ/2pi)(θ'-1)=-1
-ln(θ/2pi) = -1/(θ'-1)
-θ/2pi = e^(-1/(θ'-1))
-θ=2pi*e^(-1/(θ'-1))
-
-
-##            magSquaredAddition =  self.x ** 2 + self.y ** 2 + other.x ** 2 + other.y **2 + \
-##                2 * self.x * other.x + 2 * self.y * other.y
-##            magnitudeMultiplication = self.magnitude * other.magnitude
-##            magnitudeAddition = magSquaredAddition ** .5
-##            unscaledMagnitude = magnitudeMultiplication * magnitudeAddition
-##            magnitude = unscaledMagnitude / (self.magnitude)
+Our test suite proves this to be the case.
