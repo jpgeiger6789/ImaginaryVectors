@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0512a31f-b692-438a-a1c3-d9285c29dbea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/OldTestFiles/oldtheory.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/outputlog 2021.08.10...11.39.38.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OldTestFiles/calculation notes 3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputlog 2021.08.15...19.57.23.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VectorTheory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VectorTheory.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputlog 2021.08.10...06.22.05.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vectorArithmetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorArithmetic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputlog 2021.08.10...11.39.38.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vectorTestSuite.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorTestSuite.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

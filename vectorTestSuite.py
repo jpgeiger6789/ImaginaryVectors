@@ -504,6 +504,26 @@ def checkExponentiation(V1: vectorArithmetic.Vector,
         customAssertion(vectorArithmetic.E ** t1 == vectorArithmetic.E ** (v * i1), "Exponentiation Product rule for vector E")
         # </editor-fold>
 
+        # <editor-fold desc="Exponentiation to the second power of I' 1">
+        # (V ^ I') ^ I' = V ^ -I = I / V
+        # (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
+        t1 = (v ** vectorArithmetic.Ip) ** vectorArithmetic.Ip
+        t2 = vectorArithmetic.I / v
+        t3 = v ** (-vectorArithmetic.I)
+        customAssertion(t1 == t2, "Double exponentiation by the power of I' 1")
+        customAssertion(t1 == t3, "Double exponentiation by the power of I' 1")
+        # </editor-fold>
+
+        # <editor-fold desc="Exponentiation to the second power of I' 1">
+        # (V ^ I') ^ I' = V ^ -I = I / V
+        # (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
+        t1 = (v ** (vectorArithmetic.Ip * r)) ** vectorArithmetic.Ip
+        t2 = vectorArithmetic.I / (v ** r)
+        t3 = v ** (vectorArithmetic.I * -r)
+        customAssertion(t1 == t2, "Double exponentiation by the power of I' 2")
+        customAssertion(t1 == t3, "Double exponentiation by the power of I' 2")
+        # </editor-fold>
+
 
 def checkLogarithm(V1: vectorArithmetic.Vector,
                    V2: vectorArithmetic.Vector,
