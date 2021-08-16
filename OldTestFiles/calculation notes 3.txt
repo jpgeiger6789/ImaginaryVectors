@@ -1,0 +1,109 @@
+
+
+
+Since we have defined Vector-Vector multiplication and division, we can define Vector-Vector
+exponentiation.  There are an infinite number of ways to define exponentiation
+that satisfy the minimum rules of a consistent algebraic system, but we would like to choose
+one that "feels" like regular scalar exponentiation.  To do this, we will hold our system to
+the following constraint:
+
+
+1.) Magnitude of an exponentiation:
+Exponentiation of a vector by another vector will amplify the magnitude of the resulting
+vector equally to the exponentiation of the two magnitudes.
+If W = X^V, |W| = |X| ^ |Y|
+
+I would actually like to prove this if possible.
+
+
+
+
+
+
+If A = B ^ C, then
+A' = B ^ C / (B * C)
+A' = (B ^ (C - I)) / C
+A' / A = C
+
+Since division of vectors results in simple subtraction of angles, we can say
+θA' =  θA - θC
+θA - θA' = θC
+
+
+
+Furthermore, since A^(B+C) = A^B * A^C,
+If we say X=A^B and Y=A^C
+θA  = θX + θY
+However, if C=n*I, θY=θA
+
+
+
+so θA = θX
+Therefore, for any vector B=n*I', and any other vector C=m*I', where n and m are real numbers,
+A^(B+C) = A^B * A^Z
+θA = θA^B
+Therefore, for rotation, we can totally ignore the real component of the exponentiation!
+in other words,
+If A = B^C and C'=(0, Cy), or D = (n, Cy), where n is any real number,
+A^C = A^C' = A^D
+This is totally crazy!  But my test results show this to be true.
+
+From here, we can finally fully define rotation from vector exponentiation:
+A^(B) = A^(B') = A^(B+n*I) where B'=I'*By and n is any real number
+(A^B)^C = A^(B*C)
+θ[(A^B)^C] = θ[A^(B*C)]
+if B=n*I' and C=m*I' (we can ignore the real components of these vectors)
+B*C=n*m*I'*I'=-n*m*I
+So if V=A^B^C:
+A^B^C=A^(B*C)=A^(-n*m*I)
+θV=0A
+This is also crazy!  It says that whenever there is rotation from vector exponentiation, if it happens twice,
+it goes back to 0.
+This means...in our system, if A^B = C,  θC = θA + pi if B has an imaginary component, and θC = θA otherwise.
+What a strange coincidence!  Exponentiation either rotates the vector by a half turn or not at all!
+However, my test results do not like this...I'll need to think more about it.
+
+Now, let's look at C = n * I':
+θA' =  θA - θC
+θA' =  θA - n * θI'
+θA' =  θA - pi / 4
+θA - θA' = pi / 4
+Th
+
+Since division of vectors results in simple subtraction of angles, we can say
+that if W = X ^ Y, θW is equal to θW = θX * (θY - 1) - θY
+
+To test if this is a valid interpretation, we must prove that our implementation
+meets all the algebraic requirements of an exponentiation system:
+https://mathinsight.org/exponentiation_basic_rules
+
+Our test suite does in fact prove this.
+
+Finally, we need to implement a logarithm, which is the inverse of the
+exponentiation.
+
+If X^V = W, the logarithm is defined as follows:
+logX(W) = V
+
+We already know how to determine X^V:
+W = |X| ^ |V| < θX * (θY - 1) - θY
+
+What is a function, which given this input, will give the correct output?
+
+Let's see what happens when one of these is the E vector:
+If E ^ V = W, the natural logarithm is defined as follows:
+LN(W) = V
+
+So what is the output of E ^ V?
+W = |E| ^ |V| < θE * (θV - 1) - θV
+
+since θE = 0, this is simplified:
+W = |E| ^ |V| < - θV
+
+From here, it is obvious what the LN operator needs to be:
+LN(W) = ln(|W|) < - θW
+
+Our logarithm must meet the basic requirements for logarithms:
+https://mathinsight.org/logarithm_basics
+
+Our test suite proves this to be the case.
