@@ -4,6 +4,17 @@ that is isomorphic to imaginary arithmetic?  If so, how would such
 a system conceptually include things like raising a real number to a complex
 number?
 
+In the following document,  I will use the following convention:
+
+A capital letter symbolizes an arbitrary vector; a lowercase
+letter symbolizes a scalar.  The exception to this is the letter
+R, which I will usually subscript with another letter, which I use
+to symbolize the radius (or magnitude) of a given vector.
+
+E.g., V is a vector whereas v is a scalar
+V1 + V1 = V3 indicates vector addition whereas a + b = c indicates scalar addition
+Rv is the radius or magnitude of vector V
+
 Let's consider an imaginary number to be simply a vector Vi = (x, y)
 
 -----------------------------------------------------------------------
@@ -25,7 +36,7 @@ imaginary arithmetic.
 --------------------------------------------------------------------------
 I'll stop here to note that we must define a 0 vector and an identity vector,
 which must satisfy the properties:
-V0 + X = X for all X
+V0 + X = X + V0 = X for all X
 I * X = X * I for all X
 
 For convenience's sake, we will define an alternative identity vector
@@ -47,7 +58,6 @@ We must define a system of vector multiplication whereby:
 V1 * V2 is isomorphic to I1 * I2
 V1 / V2 is isomorphic to I1 / I2
 
-We'll need to define a new type of vector multiplication.
 It won't be the dot product, since that returns a scalar.
 It won't be the cross product, since that returns a vector perpendicular
 to the two vectors, and we want a method that returns a vector in the
@@ -150,17 +160,21 @@ From vector-scalar multiplication and division, we can easily move to
 vector-scalar exponentiation.
 First, let's consider the definition of scalar exponentiation.
 
-For a vector V raised to a positive integer n, this will simply be
-(V * V * V * ... * V) where the multiplication happens n times.
+If W = V ^ n,
+W = (V * V * ... * V) {n times}
 
 I will copy again our definition of vector multiplication:
 For two vectors V and W multiplied together, we get a resulting vector X
 defined as follows:
-V * W = X
+X = V * W
 |X| = |V| * |W|
-θX  = θV + θW mod 2pi
+θX = (θV + θW) mod 2pi
 
-From our definition of vector multiplication (copied above), we can see that the
+If W = V ^ n:
+|W| = |V| * |V| * ... * |V| {n times}
+θw = (θv + θv + ... + θv) {n times} mod 2pi
+
+From our definition of vector multiplication, we can see that the
 definition for vector exponentiation by a scalar is as follows:
 
 --------------------------------------------------------------------------
@@ -170,138 +184,94 @@ If W = V ^ n:
 |W| = |V| ^ n
 θw = θv * n mod 2pi
 
-
-
 --------------------------------------------------------------------------
                     VECTOR-VECTOR EXPONENTIATION
 --------------------------------------------------------------------------
 
-Since we have defined Vector-Vector multiplication and division, we can define Vector-Vector
-exponentiation.  There are an infinite number of ways to define exponentiation
-that satisfy the minimum rules of a consistent algebraic system, but we would like to choose
-one that "feels" like regular scalar exponentiation.  To do this, we will hold our system to
-the following constraint:
-
-1.) Magnitude of an exponentiation:
-Exponentiation of a vector by another vector will amplify the magnitude of the resulting
-vector equally to the exponentiation of the two magnitudes.
-If W = X^V, |W| = |X| ^ |Y|
-
-2.) Equivalence to scalar exponentiation:
-For any two scalars n and m, n^m / n*m = n^(m-1) / m
-Therefore, for any two vectors V and W, we will define our system such that
-(V ^ W) / (V * W) = (V ^ (W - I) ) / W
-
-Let's first look at W = n * I where n is any real number
-If X = (V ^ W) / (V * W),
-then X = (V ^ (W - I) ) / W
-Let's define X' = (V ^ (W - I) )
-Then X = X' / W
-Further, since X' = (V ^ (W - I) ), X' = (V ^ (m * I) )
-where m = n - 1
-
-We will again use the angle rule for vector division:
-For any X = V / W:
-θX = θV - θW (we can hold off the modulus until the end)
-For our system, θX = θX' - θW
-However, if W = n * I, θW = 0
-Therefore, θX = θX'
-This step can be recursed to show that for any system of the form
-X = V ^ (n * I), X' = V ^ (m * I), n = m + i where n is any real number and i is any integer (alternatively
-defined as n % 1 == m % 1; the decimal value of each is equivalent),
-θX = θX'
-
-
-This shows that exponentiation within this system of numbers with no complex component
-creates no rotation (this is isomorphic to exponentiation of real numbers)
-
-
-Since we know how division by a vector affects rotation, this gives us a definition
-of exponentiation that we can use to define rotation.
-If A = B ^ C, then
-A' = B ^ C / (B * C)
-A' = (B ^ (C - I)) / C
-A' / A = C
-
-Since division of vectors results in simple subtraction of angles, we can say
-θA' =  θA - θC
-θA - θA' = θC
-
-
-
-Furthermore, since A^(B+C) = A^B * A^C,
-If we say X=A^B and Y=A^C
-θA  = θX + θY
-However, if C=n*I, θY=θA
-
-
-
-so θA = θX
-Therefore, for any vector B=n*I', and any other vector C=m*I', where n and m are real numbers,
-A^(B+C) = A^B * A^Z
-θA = θA^B
-Therefore, for rotation, we can totally ignore the real component of the exponentiation!
-in other words,
-If A = B^C and C'=(0, Cy), or D = (n, Cy), where n is any real number,
-A^C = A^C' = A^D
-This is totally crazy!  But my test results show this to be true.
-
-From here, we can finally fully define rotation from vector exponentiation:
-A^(B) = A^(B') = A^(B+n*I) where B'=I'*By and n is any real number
-(A^B)^C = A^(B*C)
-θ[(A^B)^C] = θ[A^(B*C)]
-if B=n*I' and C=m*I' (we can ignore the real components of these vectors)
-B*C=n*m*I'*I'=-n*m*I
-So if V=A^B^C:
-A^B^C=A^(B*C)=A^(-n*m*I)
-θV=0A
-This is also crazy!  It says that whenever there is rotation from vector exponentiation, if it happens twice,
-it goes back to 0.
-This means...in our system, if A^B = C,  θC = θA + pi if B has an imaginary component, and θC = θA otherwise.
-What a strange coincidence!  Exponentiation either rotates the vector by a half turn or not at all!
-However, my test results do not like this...I'll need to think more about it.
-
-Now, let's look at C = n * I':
-θA' =  θA - θC
-θA' =  θA - n * θI'
-θA' =  θA - pi / 4
-θA - θA' = pi / 4
-Th
-
-Since division of vectors results in simple subtraction of angles, we can say
-that if W = X ^ Y, θW is equal to θW = θX * (θY - 1) - θY
-
-To test if this is a valid interpretation, we must prove that our implementation
-meets all the algebraic requirements of an exponentiation system:
+Our system must meet the basic requirements of exponentiation:
 https://mathinsight.org/exponentiation_basic_rules
+(V ^ W) * (V ^ Y) = V ^ (W + Y)
+(V ^ W) / (V ^ Y) = V ^ (W - Y)
+(V ^ W) ^ Y) = V ^ (W * Y)
+(V * W) ^ Y = (V ^ Y) * (W ^ Y)
+V ^ I = V
+V ^ 0 = I
+V ^ (-I) = I / V
+V ^ (-W) = I / (V ^ W)
 
-Our test suite does in fact prove this.
 
-Finally, we need to implement a logarithm, which is the inverse of the
-exponentiation.
+Let us look at X = V ^ W, where W = (r * I), and r is any real number.
+X = V ^ (r * I)
+X = ((V ^ r) ^ I)
+X = V ^ r
+Therefore, exponentiation of a vector with no complex component is isomorphic to exponentiation of a scalar.
+|X| = |V| ^ r
+θx = θv * r
 
-If X^V = W, the logarithm is defined as follows:
-logX(W) = V
+Next, let us look at a system of the form:
+X = (V ^ W) where W = (m * I + n * I'); m and n are any real number
+Let's say M = n * I and N' = n * I'
+Then,
+X = V ^ (M + N')
+X = (V ^ M) * (V ^ N')
+   = (V ^ M) * (V ^ (n * I'))
+   = (V ^ M) * (V ^ n) * (V ^ I')
+   = (V ^ m) * (V ^ n) * V ^ (I')
+   = (V ^ (m * n)) * (V ^ I')
+Let's define V' as V ^ (m * n)
+X = (V' * V ^ I')
+Therefore, if we can define V ^ I', we can define V ^ N for any two vectors V and N
 
-We already know how to determine X^V:
-W = |X| ^ |V| < θX * (θY - 1) - θY
 
-What is a function, which given this input, will give the correct output?
+Let us look at X = (V ^ W) ^ I', where W = r * I', and r is any real number
+X = (V ^ (r * I')) ^ I'
+X = V ^ (r * I' * I')
+X = V ^ (-r * I)
+Thus, (V ^ (r * I')) ^ I' is well-defined:
 
-Let's see what happens when one of these is the E vector:
-If E ^ V = W, the natural logarithm is defined as follows:
-LN(W) = V
+--------------------------------------------------------------------------
+                    VECTOR EXPONENTIATION BY I' TWICE
+--------------------------------------------------------------------------
+V ^ (r * I') ^ I' = V ^ (-r * I)
 
-So what is the output of E ^ V?
-W = |E| ^ |V| < θE * (θV - 1) - θV
+(this is starting to look a lot like a sinusoid...)
 
-since θE = 0, this is simplified:
-W = |E| ^ |V| < - θV
+If we can define an arbitrary vector W = V ^ r * I', we can therefore
+fully define vector-vector exponentiation.
 
-From here, it is obvious what the LN operator needs to be:
-LN(W) = ln(|W|) < - θW
 
-Our logarithm must meet the basic requirements for logarithms:
-https://mathinsight.org/logarithm_basics
 
-Our test suite proves this to be the case.
+Now, let us consider the natural logarithm function:
+LN(E^V) = V
+LogW(K) = LogE(K) / LogE(W)                        <<change of base rule: logb(x) = logd(x)/logd(b)
+LogW(K) = LN(K) / LN(W)                            <<LogE(X) = LN(X)
+LogI'(K) = LN(K) / LN(I')
+LogI'(X) = V^(r*I') = LN(X) / LN(I')
+
+
+
+What is a logarithm?  It's a function such that
+logb(b^x) = x
+
+For a complex number raised to an integer power, this means that
+LogW(W^Z) = Z                                      <<definition of a logarithm
+K = W^Z                                            <<defining a new term
+LogW(K) = Z                                        <<substitution
+LogW(K) = LogE(K) / LogE(W)                        <<change of base rule: logb(x) = logd(x)/logd(b)
+LogW(K) = LN(K) / LN(W)                            <<LogE(X) = LN(X)
+LogW(K) * LN(W) = LN(K)                            <<multiplication by LN(W)
+LN(K) = LogW(K) * LN(W)                            <<rearranging
+E^LN(K)  = E^[LogW(K)*LN(W)]                       <<exponentiating both sides by E
+K = E^[LogW(K)*LN(W)]                              <<E^LN(X) = X
+K = E ^ [Z  *  LN(W)]                              <<substitution
+W^Z = E^[Z*LN(W)]                                  <<substitution
+W' = LN(W)                                         <<defining a new term W'
+E^(W') = W                                         <<E^LN(X)= X
+
+-----------------------------------------------------------------------------------
+Suppose W = (I*Rw)*E^(I'*θw)                       <<good guess from the guys who know the answer
+W^Z = [(I*Rw)*E^(I'*θw)]^Z                         <<Exponentiating the above line by the vector Z
+W^Z = E^[Z*LN(W)]                                  <<copied from the line before we defined W'
+Then W' = LN[(I*Rw)*E^(I'*θw)]                     <<substitution
+W' = LN(I*Rw) + LN(E^(I'*θw))                      <<Ln(A*B) = Ln(A)+Ln(B)
+W' = LN(I*Rw) + I'*θw				               <<Ln(E^(X)) = X
