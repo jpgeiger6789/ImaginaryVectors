@@ -74,7 +74,7 @@ W' = LN(I*Rw) + LN(E^(I'*θw))                      <<Ln(A*B) = Ln(A)+Ln(B)
 W' = LN(I*Rw) + I'*iθw				               <<Ln(E^(x)) = I*x
 W = E^(W')					                       <<copied from above
 W = E^[LN(I*Rw) + I'*θw]                           <<substituting W'
-W = [E^LN(I*Rw)]*[E^(I'*θw)]                       <<X^(A+B) = (X^A)*(X^B)
+W = [E^LN(I*Rw)]*[E^(I'*θw)]                       <<X^(A*B) = (X^A)^B
 W = (I*Rw)*E^(I'*θw)				               <<E^LN(X) = X
 W^Z = [(I*Rw)*E^(I'*θw)]^Z                         <<Exponentiating the above line by the vector Z
 W^Z = E^[Z*LN(W)]                                  <<copied from the line before we defined W'

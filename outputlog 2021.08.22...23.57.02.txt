@@ -1,0 +1,216 @@
+----------------------------------------------------------------------------------------------------
+exp_XY - E to the Power of Zero; Real Vectors; Expected? False
+Assertion Error, line 778: exp_XY - E to the Power of Zero; Real Vectors
+vectorArithmetic.V0.exp_XY() == vectorArithmetic.I, "exp_XY - E to the Power of Zero"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - E to the Power of Zero; Real Vectors; Expected? False
+Assertion Error, line 779: exp_rθ - E to the Power of Zero; Real Vectors
+vectorArithmetic.V0.exp_rθ() == vectorArithmetic.I, "exp_rθ - E to the Power of Zero"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - E to the Power of Zero; Real Vectors; Expected? False
+Assertion Error, line 780: exp_rθ2 - E to the Power of Zero; Real Vectors
+vectorArithmetic.V0.exp_rθ2() == vectorArithmetic.I, "exp_rθ2 - E to the Power of Zero"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_XY - E to the Power of One; Real Vectors; Expected? False
+Assertion Error, line 788: exp_XY - E to the Power of One; Real Vectors
+vectorArithmetic.I.exp_XY() == vectorArithmetic.E, "exp_XY - E to the Power of One"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - E to the Power of One; Real Vectors; Expected? False
+Assertion Error, line 789: exp_rθ - E to the Power of One; Real Vectors
+vectorArithmetic.I.exp_rθ() == vectorArithmetic.E, "exp_rθ - E to the Power of One"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - E to the Power of One; Real Vectors; Expected? False
+Assertion Error, line 790: exp_rθ2 - E to the Power of One; Real Vectors
+vectorArithmetic.I.exp_rθ2() == vectorArithmetic.E, "exp_rθ2 - E to the Power of One"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_XY - E to the Power of Negative One; Real Vectors; Expected? False
+Assertion Error, line 798: exp_XY - E to the Power of Negative One; Real Vectors
+(-(vectorArithmetic.I)).exp_XY() == vectorArithmetic.I / vectorArithmetic.E
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - E to the Power of Negative One; Real Vectors; Expected? False
+Assertion Error, line 800: exp_rθ - E to the Power of Negative One; Real Vectors
+(-(vectorArithmetic.I)).exp_rθ() == vectorArithmetic.I / vectorArithmetic.E
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - E to the Power of Negative One; Real Vectors; Expected? False
+Assertion Error, line 802: exp_rθ2 - E to the Power of Negative One; Real Vectors
+(-(vectorArithmetic.I)).exp_rθ2() == vectorArithmetic.I / vectorArithmetic.E
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_r - E to the Power of Negative One; Real Vectors; Expected? False
+Assertion Error, line 804: exp_r - E to the Power of Negative One; Real Vectors
+(-(vectorArithmetic.I)).exp_r() == vectorArithmetic.I / vectorArithmetic.E
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+__pow__ - E to the Power of Negative One; Real Vectors; Expected? False
+Assertion Error, line 808: __pow__ - E to the Power of Negative One; Real Vectors
+vectorArithmetic.E ** (-vectorArithmetic.I) == vectorArithmetic.I / vectorArithmetic.E, "__pow__ - E to the Power of Negative One"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_XY - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 813: exp_XY - Exponentiation Product Rule; Real Vectors
+v.exp_XY() * V4.exp_XY() == (v + V4).exp_XY()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 815: exp_rθ - Exponentiation Product Rule; Real Vectors
+v.exp_XY() * V4.exp_rθ() == (v + V4).exp_rθ()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 817: exp_rθ2 - Exponentiation Product Rule; Real Vectors
+v.exp_XY() * V4.exp_rθ2() == (v + V4).exp_rθ2()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_r - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 819: exp_r - Exponentiation Product Rule; Real Vectors
+v.exp_XY() * V4.exp_r() == (v + V4).exp_r()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_Taylor - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 821: exp_Taylor - Exponentiation Product Rule; Real Vectors
+v.exp_XY() * V4.exp_TaylorExpansion() == (v + V4).exp_TaylorExpansion()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+__pow__ - Exponentiation Product Rule; Real Vectors; Expected? False
+Assertion Error, line 823: __pow__ - Exponentiation Product Rule; Real Vectors
+(vectorArithmetic.E ** (v)) * (vectorArithmetic.E ** (V4)) == vectorArithmetic.E ** (v + V4), "__pow__ - Exponentiation Product Rule"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_XY - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 829: exp_XY - Exponentiation Quotient Rule 1; Real Vectors
+v.exp_XY() / V4.exp_XY() == (v - V4).exp_XY()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 831: exp_rθ - Exponentiation Quotient Rule 1; Real Vectors
+v.exp_XY() / V4.exp_rθ() == (v - V4).exp_rθ()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 833: exp_rθ2 - Exponentiation Quotient Rule 1; Real Vectors
+v.exp_XY() / V4.exp_rθ2() == (v - V4).exp_rθ2()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_r - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 835: exp_r - Exponentiation Quotient Rule 1; Real Vectors
+v.exp_XY() / V4.exp_r() == (v - V4).exp_r()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_Taylor - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 837: exp_Taylor - Exponentiation Quotient Rule 1; Real Vectors
+v.exp_XY() / V4.exp_TaylorExpansion() == (v - V4).exp_TaylorExpansion()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+__pow__ - Exponentiation Quotient Rule 1; Real Vectors; Expected? False
+Assertion Error, line 839: __pow__ - Exponentiation Quotient Rule 1; Real Vectors
+(vectorArithmetic.E ** (v)) / (vectorArithmetic.E ** (V4)) == vectorArithmetic.E ** (v - V4), "__pow__ - Exponentiation Quotient Rule 1"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_XY - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 845: exp_XY - Exponentiation Quotient Rule 2; Real Vectors
+v.exp_XY() * (-V4).exp_XY() == (v - V4).exp_XY()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 847: exp_rθ - Exponentiation Quotient Rule 2; Real Vectors
+v.exp_XY() * (-V4).exp_rθ() == (v - V4).exp_rθ()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_rθ2 - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 849: exp_rθ2 - Exponentiation Quotient Rule 2; Real Vectors
+v.exp_XY() * (-V4).exp_rθ2() == (v - V4).exp_rθ2()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_r - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 851: exp_r - Exponentiation Quotient Rule 2; Real Vectors
+v.exp_XY() * (-V4).exp_r() == (v - V4).exp_r()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+exp_Taylor - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 853: exp_Taylor - Exponentiation Quotient Rule 2; Real Vectors
+v.exp_XY() * (-V4).exp_TaylorExpansion() == (v - V4).exp_TaylorExpansion()
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+__pow__ - Exponentiation Quotient Rule 2; Real Vectors; Expected? False
+Assertion Error, line 855: __pow__ - Exponentiation Quotient Rule 2; Real Vectors
+(vectorArithmetic.E ** (v)) * (vectorArithmetic.E ** (-V4)) == vectorArithmetic.E ** (v - V4), "__pow__ - Exponentiation Quotient Rule 2"
+V1:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01) || V2:Vector: (6.76e+00,5.98e+00);(9.03e+00<7.24e-01) || V3:Vector: (4.28e+00,9.45e+00);(1.04e+01<1.15e+00) || V4:Vector: (-8.50e+00,-7.12e-01);(8.53e+00<3.23e+00) || v:Vector: (2.61e+00,1.31e+00);(2.92e+00<4.65e-01)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Real Number Subtraction Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 708: Real Number Subtraction Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory
+Vi - Vj.x == Vi - vectorArithmetic.Vector(-Vj.x, 0), "Real Number Subtraction Isomorphism"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Real Number Multiplication Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 710: Real Number Multiplication Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory
+Vi * Vj.x == Vi * vectorArithmetic.Vector(-Vj.x, 0), "Real Number Multiplication Isomorphism"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Real Number Division Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 716: Real Number Division Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory
+Vi / Vj.x == Vi / vectorArithmetic.Vector(-Vj.x, 0), "Real Number Division Isomorphism"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Real Number Exponentiation Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 720: Real Number Exponentiation Isomorphism; Real Vector->Imaginary Isomorphism, Vector Theory
+Vi ** Vj.x == Vi ** vectorArithmetic.Vector(-Vj.x, 0), "Real Number Exponentiation Isomorphism"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Nonrotation from ignoring the x vector; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 722: Nonrotation from ignoring the x vector; Real Vector->Imaginary Isomorphism, Vector Theory
+Vi ** Vj == Vi ** vectorArithmetic.Vector(0, Vj.y), "Nonrotation from ignoring the x vector"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Nonrotation from double exponentiation; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 730: Nonrotation from double exponentiation; Real Vector->Imaginary Isomorphism, Vector Theory
+((Vi ** B) ** C).θ == Vi.θ, "Nonrotation from double exponentiation"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || x:-2 || y:1 || B:Vector: (-1.22e-16,-2.00e+00);(-2.00e+00<1.57e+00) || C:Vector: (6.12e-17,1.00e+00);(1.00e+00<1.57e+00)
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Definition of Vector Exponentiation; Real Vector->Imaginary Isomorphism, Vector Theory; Expected? False
+Assertion Error, line 735: Definition of Vector Exponentiation; Real Vector->Imaginary Isomorphism, Vector Theory
+(Vi ** Vj) / (Vi * Vj) == ((Vi ** (Vj - vectorArithmetic.I)) / Vi), "Definition of Vector Exponentiation"
+randomFunc:<bound method Random.uniform of <random.Random object at 0x000002A133A7F470>> || n:200 || valRange:(-10, 10) || i:0 || x1:2.416873174135004 || x2:3.342918434586391 || x3:-3.2678271723715753 || x4:-2.2377295442293166 || y1:4.368114491214312 || y2:7.402298135652877 || y3:6.958203886382812 || y4:9.835477251055572 || randInt1:-2 || randInt2:1 || randInt3:0 || randInt4:-3 || randInts:[-2, 1, 0, -3] || randFloat1:1 || randFloat2:-3 || randFloat3:-1 || randFloat4:-3 || randFloats:[1, -3, -1, -3] || V1:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || V2:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || V3:Vector: (-3.27e+00,6.96e+00);(7.69e+00<2.01e+00) || V4:Vector: (-2.24e+00,9.84e+00);(1.01e+01<1.79e+00) || I1:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || I2:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || I3:Imaginary Vector: (-3.27e+00,6.96e+00i);(7.69e+00<2.01e+00) || I4:Imaginary Vector: (-2.24e+00,9.84e+00i);(1.01e+01<1.79e+00) || vectors:(Vector: (2.416873174135004,4.368114491214312);(4.992163874334444<1.065423859267429), Vector: (3.342918434586391,7.402298135652877);(8.122137732726994<1.1466080810296897), Vector: (-3.2678271723715753,6.958203886382812);(7.687346470204323<2.0098595181121137), Vector: (-2.2377295442293166,9.835477251055572);(10.086825381117114<1.7945043464624462)) || imaginaryVectors:(Imaginary Vector: (2.416873174135004,4.368114491214312i);(4.992163874334444<1.065423859267429), Imaginary Vector: (3.342918434586391,7.402298135652877i);(8.122137732726994<1.1466080810296897), Imaginary Vector: (-3.2678271723715753,6.958203886382812i);(7.687346470204323<2.0098595181121137), Imaginary Vector: (-2.2377295442293166,9.835477251055572i);(10.086825381117114<1.7945043464624462)) || j:1 || Vi:Vector: (2.42e+00,4.37e+00);(4.99e+00<1.07e+00) || Vj:Vector: (3.34e+00,7.40e+00);(8.12e+00<1.15e+00) || Ii:Imaginary Vector: (2.42e+00,4.37e+00i);(4.99e+00<1.07e+00) || Ij:Imaginary Vector: (3.34e+00,7.40e+00i);(8.12e+00<1.15e+00) || x:0 || y:-3 || B:Vector: (0.00e+00,0.00e+00);(0.00e+00<1.57e+00) || C:Vector: (-1.84e-16,-3.00e+00);(-3.00e+00<1.57e+00)
+----------------------------------------------------------------------------------------------------

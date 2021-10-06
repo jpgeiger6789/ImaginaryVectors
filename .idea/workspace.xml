@@ -4,11 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0512a31f-b692-438a-a1c3-d9285c29dbea" name="Changes" comment="test" />
+    <list default="true" id="0512a31f-b692-438a-a1c3-d9285c29dbea" name="Changes" comment="test">
+      <change afterPath="$PROJECT_DIR$/outputlog 2021.08.15...22.34.39.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputlog 2021.08.22...23.57.02.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plotVectors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldTestFiles/oldtheory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OldTestFiles/oldtheory.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VectorTheory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VectorTheory.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputlog 2021.08.15...19.57.23.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vectorArithmetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorArithmetic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vectorTestSuite.py" beforeDir="false" afterPath="$PROJECT_DIR$/vectorTestSuite.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -34,9 +51,43 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Program Files/Python 3.9.6/Lib/site-packages/numpy/__init__.py" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="RunManager" selected="Python.vectorTestSuite">
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\abcd_\Documents\GitHub\ImaginaryVectors" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.vectorArithmetic">
+    <configuration name="plotVectors" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ImaginaryVectors" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plotVectors.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="vectorArithmetic" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ImaginaryVectors" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,8 +132,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.vectorTestSuite" />
         <item itemvalue="Python.vectorArithmetic" />
+        <item itemvalue="Python.plotVectors" />
+        <item itemvalue="Python.vectorTestSuite" />
       </list>
     </recent_temporary>
   </component>
@@ -102,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629073181714</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="test">
+      <created>1629073362551</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1629073362551</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

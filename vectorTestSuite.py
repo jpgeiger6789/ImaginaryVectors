@@ -144,10 +144,11 @@ def testNVectors(vecTypeList: Sequence, randomFunc: callable, n: int, valRange=(
         # </editor-fold>
 
         # <editor-fold desc="Check Algebraic Rules">
-        checkAddition(V1, V2, V3, V4)
-        checkMultiplication(V1, V2, V3, V4)
-        checkExponentiation(V1, V2, V3, V4)
-        checkLogarithm(V1, V2, V3, V4)
+        #checkAddition(V1, V2, V3, V4)
+        #checkMultiplication(V1, V2, V3, V4)
+        #checkExponentiation(V1, V2, V3, V4)
+        #checkLogarithm(V1, V2, V3, V4)
+        checkE_Exponentiation(V1, V2, V3, V4)
         # </editor-fold>
 
 
@@ -325,6 +326,7 @@ def checkExponentiation(V1: vectorArithmetic.Vector,
                         V4: vectorArithmetic.Vector) -> None:
 
     # https://mathinsight.org/exponentiation_basic_rules
+    global expectedFailure
 
     for v in (V1, V2, V3):
         # <editor-fold desc="Exponentiation Membership 1">
@@ -345,9 +347,13 @@ def checkExponentiation(V1: vectorArithmetic.Vector,
         # <editor-fold desc="Exponentiation Membership 2">
         # 1:  If {V} is the set containing all vectors, V1 ^ n ∈ {V} where n is any real number
         # 2:  alternatively, there exists an V2 that solves V1 = V2^n -- V2 = V1^(1/n)
+        # however, condition number 2 fails because modular multiplication is not an invertible
+        # operation.  Therefore, the angle of the inverted vector is not guaranteed to be the same.
+        expectedFailure = True
         r = random.uniform(2, 10)
         t1 = v ** r
         customAssertion(v == t1 ** (1 / r), "Exponentiation Membership 2")
+        expectedFailure = False
         # </editor-fold>
 
         # <editor-fold desc="Equivalence of Exponentiation and Multiplication">
@@ -505,8 +511,8 @@ def checkExponentiation(V1: vectorArithmetic.Vector,
         # </editor-fold>
 
         # <editor-fold desc="Exponentiation to the second power of I' 1">
-        # (V ^ I') ^ I' = V ^ -I = I / V
-        # (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
+        # 1.) (V ^ I') ^ I' = V ^ -I = I / V
+        # 2.) (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
         t1 = (v ** vectorArithmetic.Ip) ** vectorArithmetic.Ip
         t2 = vectorArithmetic.I / v
         t3 = v ** (-vectorArithmetic.I)
@@ -515,13 +521,19 @@ def checkExponentiation(V1: vectorArithmetic.Vector,
         # </editor-fold>
 
         # <editor-fold desc="Exponentiation to the second power of I' 1">
-        # (V ^ I') ^ I' = V ^ -I = I / V
-        # (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
+        # 1.) (V ^ I') ^ I' = V ^ -I = I / V
+        # 2.) (V ^ (r * I')) = V ^ (-r * I) = I / (V ^ r)
         t1 = (v ** (vectorArithmetic.Ip * r)) ** vectorArithmetic.Ip
         t2 = vectorArithmetic.I / (v ** r)
         t3 = v ** (vectorArithmetic.I * -r)
         customAssertion(t1 == t2, "Double exponentiation by the power of I' 2")
         customAssertion(t1 == t3, "Double exponentiation by the power of I' 2")
+        # </editor-fold>
+
+        # <editor-fold desc="Exponentiation of I by I'">
+        # I ^ I' = I
+        t1 = vectorArithmetic.I ** vectorArithmetic.Ip
+        customAssertion(t1 == vectorArithmetic.I, "Exponentiation of I by I'")
         # </editor-fold>
 
 
@@ -531,6 +543,7 @@ def checkLogarithm(V1: vectorArithmetic.Vector,
                    V4: vectorArithmetic.Vector) -> None:
 
     # https://mathinsight.org/logarithm_basics
+    global expectedFailure
 
     # <editor-fold desc="Logarithm of E Rule">
     # ln(e) = 1
@@ -545,6 +558,11 @@ def checkLogarithm(V1: vectorArithmetic.Vector,
     # <editor-fold desc="Logarithm of 1p Rule">
     # ln(1) = 0
     customAssertion(vectorArithmetic.Ip.ln() == 0, "Logarithm of 1p Rule")
+    # </editor-fold>
+
+    # <editor-fold desc="Logarithm of E^I'">
+    # ln(E^I') = I'
+    customAssertion((vectorArithmetic.E ** vectorArithmetic.Ip.ln()) == vectorArithmetic.Ip, "Logarithm of E^I'")
     # </editor-fold>
 
     for v in (V1, V2, V3):
@@ -595,6 +613,7 @@ def checkLogarithm(V1: vectorArithmetic.Vector,
             t = v * V4
             customAssertion((vectorArithmetic.I / t).ln() == -(t.ln()), "Logarithm of Reciprocal Rule")
         # </editor-fold>
+
 
 
 def checkIsomorphismAndVectorTheory(randomFunc: callable, n: int, valRange=(-10, 10)) -> None:
@@ -724,6 +743,117 @@ def checkIsomorphismAndVectorTheory(randomFunc: callable, n: int, valRange=(-10,
 
         # </editor-fold>
 
+def checkE_Exponentiation(V1: vectorArithmetic.Vector,
+                   V2: vectorArithmetic.Vector,
+                   V3: vectorArithmetic.Vector,
+                   V4: vectorArithmetic.Vector) -> None:
+
+    """
+below is a list of rules our system must follow:
+
+(V ^ W) * (V ^ Y) = V ^ (W + Y)  << (E ** W) * (E ** Y) = E ^ (W + Y)
+(V ^ W) / (V ^ Y) = V ^ (W - Y)  << (E ** W) / (E ** Y) = E ^ (W - Y)
+(V ^ W) ^ Y) = V ^ (W * Y)       << can't check this one directly
+(V * W) ^ Y = (V ^ Y) * (W ^ Y)  << can't check this one directly
+V ^ I = V                        << (E ** I) = E
+V ^ 0 = I                        << (E ** 0) = I
+V ^ (-I) = I / V                 << (E ** -I) = I / E
+V ^ (-W) = I / (V ^ W)           << (E ** -W) = I / (E ** W)
+I ^ I' = I                       << can't check this one directly
+(V ^ (r * I')) ^ I' = V ^ (-r * I) << can't check this one directly
+E ** V = V.exp() << we defined the exponential using a Taylor series expansion;
+we have programmed that internally to the Vector object in the vectorArithmetic.py module
+"""
+
+
+    # https://mathinsight.org/exponentiation_basic_rules
+    global expectedFailure
+
+
+
+    for v in (V1, V2, V3):
+
+        # <editor-fold desc="Power of Zero">
+        # (E ** 0) = I Power of zero rule
+        customAssertion(vectorArithmetic.V0.exp_XY() == vectorArithmetic.I, "exp_XY - E to the Power of Zero")
+        customAssertion(vectorArithmetic.V0.exp_rθ() == vectorArithmetic.I, "exp_rθ - E to the Power of Zero")
+        customAssertion(vectorArithmetic.V0.exp_rθ2() == vectorArithmetic.I, "exp_rθ2 - E to the Power of Zero")
+        customAssertion(vectorArithmetic.V0.exp_r() == vectorArithmetic.I, "exp_r - E to the Power of Zero")
+        customAssertion(vectorArithmetic.V0.exp_TaylorExpansion() == vectorArithmetic.I, "exp_Taylor - E to the Power of Zero")
+        customAssertion(vectorArithmetic.E ** vectorArithmetic.V0 == vectorArithmetic.I, "__pow__ - E to the Power of Zero")
+        # </editor-fold>
+
+        # <editor-fold desc="Power of One">
+        # (E ** I) = E Power of one rule
+        customAssertion(vectorArithmetic.I.exp_XY() == vectorArithmetic.E, "exp_XY - E to the Power of One")
+        customAssertion(vectorArithmetic.I.exp_rθ() == vectorArithmetic.E, "exp_rθ - E to the Power of One")
+        customAssertion(vectorArithmetic.I.exp_rθ2() == vectorArithmetic.E, "exp_rθ2 - E to the Power of One")
+        customAssertion(vectorArithmetic.I.exp_r() == vectorArithmetic.E, "exp_r - E to the Power of One")
+        customAssertion(vectorArithmetic.I.exp_TaylorExpansion() == vectorArithmetic.E, "exp_Taylor - E to the Power of One")
+        customAssertion(vectorArithmetic.E ** vectorArithmetic.I == vectorArithmetic.E, "__pow__ - E to the Power of One")
+        # </editor-fold>
+
+        # <editor-fold desc="Power of Negative 1">
+        # (E ** -I) = I / E Power of negative one rule
+        customAssertion((-(vectorArithmetic.I)).exp_XY() == vectorArithmetic.I / vectorArithmetic.E,
+                        "exp_XY - E to the Power of Negative One")
+        customAssertion((-(vectorArithmetic.I)).exp_rθ() == vectorArithmetic.I / vectorArithmetic.E,
+                        "exp_rθ - E to the Power of Negative One")
+        customAssertion((-(vectorArithmetic.I)).exp_rθ2() == vectorArithmetic.I / vectorArithmetic.E,
+                        "exp_rθ2 - E to the Power of Negative One")
+        customAssertion((-(vectorArithmetic.I)).exp_r() == vectorArithmetic.I / vectorArithmetic.E,
+                        "exp_r - E to the Power of Negative One")
+        customAssertion((-(vectorArithmetic.I)).exp_TaylorExpansion() == vectorArithmetic.I / vectorArithmetic.E,
+                        "exp_Taylor - E to the Power of Negative One")
+        customAssertion(vectorArithmetic.E ** (-vectorArithmetic.I) == vectorArithmetic.I / vectorArithmetic.E, "__pow__ - E to the Power of Negative One")
+        # </editor-fold>
+
+        # <editor-fold desc="Exponentiation Product Rule">
+        # (E ** W) * (E ** Y) = E ^ (W + Y)  product rule
+        customAssertion(v.exp_XY() * V4.exp_XY() == (v + V4).exp_XY(),
+                        "exp_XY - Exponentiation Product Rule")
+        customAssertion(v.exp_XY() * V4.exp_rθ() == (v + V4).exp_rθ(),
+                        "exp_rθ - Exponentiation Product Rule")
+        customAssertion(v.exp_XY() * V4.exp_rθ2() == (v + V4).exp_rθ2(),
+                        "exp_rθ2 - Exponentiation Product Rule")
+        customAssertion(v.exp_XY() * V4.exp_r() == (v + V4).exp_r(),
+                        "exp_r - Exponentiation Product Rule")
+        customAssertion(v.exp_XY() * V4.exp_TaylorExpansion() == (v + V4).exp_TaylorExpansion(),
+                        "exp_Taylor - Exponentiation Product Rule")
+        customAssertion((vectorArithmetic.E ** (v)) * (vectorArithmetic.E ** (V4)) == vectorArithmetic.E ** (v + V4), "__pow__ - Exponentiation Product Rule")
+        # </editor-fold>
+
+        # <editor-fold desc="Exponentiation Quotient Rule 1">
+        # 1: (E ** W) / (E ** Y) = E ^ (W - Y)  quotient rule
+        # 2: (E ** W) * (E ** -Y) = E ^ (W - Y)  quotient rule
+        customAssertion(v.exp_XY() / V4.exp_XY() == (v - V4).exp_XY(),
+                        "exp_XY - Exponentiation Quotient Rule 1")
+        customAssertion(v.exp_XY() / V4.exp_rθ() == (v - V4).exp_rθ(),
+                        "exp_rθ - Exponentiation Quotient Rule 1")
+        customAssertion(v.exp_XY() / V4.exp_rθ2() == (v - V4).exp_rθ2(),
+                        "exp_rθ2 - Exponentiation Quotient Rule 1")
+        customAssertion(v.exp_XY() / V4.exp_r() == (v - V4).exp_r(),
+                        "exp_r - Exponentiation Quotient Rule 1")
+        customAssertion(v.exp_XY() / V4.exp_TaylorExpansion() == (v - V4).exp_TaylorExpansion(),
+                        "exp_Taylor - Exponentiation Quotient Rule 1")
+        customAssertion((vectorArithmetic.E ** (v)) / (vectorArithmetic.E ** (V4)) == vectorArithmetic.E ** (v - V4), "__pow__ - Exponentiation Quotient Rule 1")
+        # </editor-fold>
+
+        # <editor-fold desc="Exponentiation Quotient Rule 2">
+        # 1: (E ** W) / (E ** Y) = E ^ (W - Y)  quotient rule
+        # 2: (E ** W) * (E ** -Y) = E ^ (W - Y)  quotient rule
+        customAssertion(v.exp_XY() * (-V4).exp_XY() == (v - V4).exp_XY(),
+                        "exp_XY - Exponentiation Quotient Rule 2")
+        customAssertion(v.exp_XY() * (-V4).exp_rθ() == (v - V4).exp_rθ(),
+                        "exp_rθ - Exponentiation Quotient Rule 2")
+        customAssertion(v.exp_XY() * (-V4).exp_rθ2() == (v - V4).exp_rθ2(),
+                        "exp_rθ2 - Exponentiation Quotient Rule 2")
+        customAssertion(v.exp_XY() * (-V4).exp_r() == (v - V4).exp_r(),
+                        "exp_r - Exponentiation Quotient Rule 2")
+        customAssertion(v.exp_XY() * (-V4).exp_TaylorExpansion() == (v - V4).exp_TaylorExpansion(),
+                        "exp_Taylor - Exponentiation Quotient Rule 2")
+        customAssertion((vectorArithmetic.E ** (v)) * (vectorArithmetic.E ** (-V4)) == vectorArithmetic.E ** (v - V4), "__pow__ - Exponentiation Quotient Rule 2")
+        # </editor-fold>
 
 if __name__ == "__main__":
     success = True
@@ -732,3 +862,5 @@ if __name__ == "__main__":
 
     with open(errLogFileName, "w", encoding="utf-8") as errLog:
         testSystem()
+
+

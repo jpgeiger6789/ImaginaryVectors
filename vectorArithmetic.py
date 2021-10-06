@@ -90,7 +90,7 @@ class Vector:
         return self.__class__(x=x, y=y)
 
     def __neg__(self) -> "Vector":
-        return self.__class__(x=-self.x, y=-self.y)
+        return Vector(x=(-self.x), y=(-self.y))
     # </editor-fold>
 
     # <editor-fold desc="Mutiplication Division">
@@ -142,6 +142,34 @@ class Vector:
         magnitude = math.log(self.magnitude)
         θ = - self.θ
         return self.__class__(magnitude=magnitude, θ=θ)
+
+    def exp_TaylorExpansion(self, expansionLength=18) -> "Vector":
+        # E^V = I + V/1! + V^2/2! + V^3/3! + ...
+        # basic testing indicates full convergence at an expansion length of 18
+        returnVal = I
+        for i in range(1, expansionLength):
+            returnVal += (self ** i) / math.factorial(i)
+        return returnVal
+
+    def exp(self):
+        return Vector(magnitude=math.e ** self.x, θ=self.y)
+
+    def exp_XY(self):
+        return Vector(x=math.e ** self.x, y=math.e ** self.y)
+
+    def exp_rθ(self):
+        return Vector(magnitude=math.e ** self.magnitude, θ=math.e ** self.θ)
+
+    def exp_rθ2(self):
+        return Vector(magnitude=math.e ** self.magnitude, θ=(math.e ** (self.θ+1) - 1))
+
+    def exp_r(self):
+        return Vector(magnitude=math.e ** self.magnitude, θ=self.θ)
+
+    def exp_real_vs_complex(self):
+        realExp = Vector(x=math.e ** self.x, y=0)
+        complexExp = Vector(x=math.cos(self.y), y=math.sin(self.y))
+        return realExp * complexExp
 
     def log(self, other: "Vector") -> "Vector":
         # if V1 ^ V3 = V2, logV1(V2) = V3

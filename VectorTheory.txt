@@ -184,9 +184,19 @@ If W = V ^ n:
 |W| = |V| ^ n
 θw = θv * n mod 2pi
 
+note here that because the change in angle is a modular multiplicative
+operation, we will not be able to "undo" this operation.  Take, for example,
+θv = 3, n = 3.  Then, if W = V ^ 3, θw = θv * 3 mod 2pi = 9 mod 2pi ~2.72
+Then, Z = W ^ 1/3 will give an angle of θz ~ 0.9, which is obviously not
+equal to the original angle.  However, we can see that both vectors
+Z and V raised to the third power do give W, so "inverse exponentiation"
+is not a unique operation.
+
 --------------------------------------------------------------------------
                     VECTOR-VECTOR EXPONENTIATION
 --------------------------------------------------------------------------
+
+http://scipp.ucsc.edu/~haber/ph116A/clog_11.pdf
 
 Our system must meet the basic requirements of exponentiation:
 https://mathinsight.org/exponentiation_basic_rules
@@ -220,8 +230,7 @@ X = (V ^ M) * (V ^ N')
    = (V ^ (m * n)) * (V ^ I')
 Let's define V' as V ^ (m * n)
 X = (V' * V ^ I')
-Therefore, if we can define V ^ I', we can define V ^ N for any two vectors V and N
-
+Therefore, if we can define V ^ I', we can define V ^ W for any two vectors V and W
 
 Let us look at X = (V ^ W) ^ I', where W = r * I', and r is any real number
 X = (V ^ (r * I')) ^ I'
@@ -239,6 +248,142 @@ V ^ (r * I') ^ I' = V ^ (-r * I)
 If we can define an arbitrary vector W = V ^ r * I', we can therefore
 fully define vector-vector exponentiation.
 
+Let us look at (I * I') ^ I':
+(I * I') ^ I' = (I ^ I') * (I' ^ I')
+I' ^ I' = (I ^ I') * (I' ^ I')
+
+--------------------------------------------------------------------------
+                    EXPONENTIATION OF I BY I'
+--------------------------------------------------------------------------
+Therefore, I ^ I' = I
+
+V ^ -I = V ^ I' * I' = (V ^ I') ^ I'
+
+
+
+Let us look at the Taylor series expansion for E^I'
+
+The Taylor series of a real or complex-valued function f(x) that is
+infinitely differentiable at a real or complex number a is the power series
+
+f(x+a) = f(a) + f'(a)/1!*(x-a) + f''(a)/2!*(x-a)^2 + f'''(a)/3!*(x-a)^3+...,
+
+Let us look specifically at a = 0 - this is the Mclaurin series.
+
+f(x+0) = f(0) + f'(0)*x/1! + f''(0)*x^2/2! = f'''(0)*x^3/3! + ... ,
+
+So for a vector V, the Mclaurin series of F(V)=E^V is:
+
+F(V) = E^0 + V * E^0/1! + V^2 * E^0/2! + V^3 * E^0/3!
+
+We are here assuming that d/dV(E^V) = E^V * dV, we will need to prove this later.
+
+F(V) = I + V/1! + V^2/2! + V^3/3! + ...
+
+We will use this as a definition of E^V.  Basic testing indicates full convergence
+at a series length of 18.
+
+Testing this definition out yields some interesting results.
+
+If F(V) = E^V:
+F(n*I) = (e^n<0)
+    this is as expected; vector arithmetic for "scalar vectors" is equivalent to scalar
+    arithmetic
+F(n*I') = (1<n)
+    this is somewhat surprising, but does prove Euler's theorem in vector space:
+    e^ix = cos(x) + i*sin(x)
+
+Is it true that F'(x) = F(x)?
+F'(x) = -sin(x) + i*cos(x)
+From this, it is obvious that F(x) != F'(x)
+Therefore, this derivation is invalid!!  Our assumption did not hold true!
+
+So trying to derive this from "first principles" has not yet been successful.
+
+Let's try to think of an alternative way to define the vector exponential function.
+
+https://www.youtube.com/watch?v=m2MIpDrF7Es&t=56s
+From this video, made by 3blue1brown, the exponential is a function whose definition
+is related to rates of change in size - when the rate of change in size is proportional
+to the current size.
+
+How would that be similar for our exponential function?
+Well, there are a few ways to define the "size" of a vector.  You could start with
+the x and y coordinates, and exponentiate each of them, and say that the resulting
+vector is the output of this exponential function.
+Or, you could take the radius and angle of the vector, exponentiate each of them,
+and say that the resulting vector is the output of this exponential function.
+Or, you could exponentiate only the radius of the vector, holding the angle constant.
+These three options will each give wildly different results.  How do we know
+which, if any, is correct?
+
+We now need to hold ourselves to the rules defined earlier, especially given our
+rules of vector addition/subtraction and division/multiplication.
+
+below is a list of rules our system must follow:
+
+(V ^ W) * (V ^ Y) = V ^ (W + Y)
+(V ^ W) / (V ^ Y) = V ^ (W - Y)
+(V ^ W) ^ Y) = V ^ (W * Y)
+(V * W) ^ Y = (V ^ Y) * (W ^ Y)
+V ^ I = V
+V ^ 0 = I
+V ^ (-I) = I / V
+V ^ (-W) = I / (V ^ W)
+I ^ I' = I
+V ^ (r * I') ^ I' = V ^ (-r * I)
+E ** V = V.exp() << we defined the exponential using a Taylor series expansion;
+we have programmed that internally to the Vector object in the vectorArithmetic.py module
+
+Now, let us look in turn at each of our various proposed equivalents.
+
+One problem that immediately pops out is that there is no version of "negative exponentiation"
+since the magnitude of the vector is always positive.
+
+In fact, upon further consideration, there is no version of "negative numbers" for vectors...
+
+--------------------------------------------------------------------------
+                    VECTOR-VECTOR LOGARITHM
+--------------------------------------------------------------------------
+
+
+Our system must meet the basic requirements of exponentiation:
+https://mathinsight.org/exponentiation_basic_rules
+LN(X * Y) = LN(X) + LN(Y)
+LN(X / Y) = LN(X) - LN(Y)
+LN(X ^ Y) = Y * LN(X)
+LN(E) = I
+LN(I) = 0
+LN(I / X) = -LN(X)
+
+Let us look at LN(V ^ I'):
+LN(V ^ I') = I' * LN(V)
+
+
+W^Z = (E^LN(W))^Z                                  <<E^LN(X) = X
+W^Z = E^(Z * LN(W))                                <<(X^A)^B = X^(A*B)
+
+If Z = I',
+LN(W^Z) = Z * LN(W)
+LN(W^I') = I' * LN(W)
+
+
+
+
+
+Let us look at the Taylor
+
+We will define exp(V) as the sum from k = 0 to infinity of V^k / k!:
+exp(V) = I + V + 1/2!V^2 + 1/3!V^3 + ... (this is the Taylor Expansion)
+e = exp(1) =  1 * Σ(1/k)! from k = 0 to infinity
+Therefore, in vector notation, Ve = e * I; I will designate this E
+E = e * I
+E = (e, 0)
+E = (e<0)
+
+Now, let's consider E ^ r * I':
+exp(I') = I + I' + 1/2 * I' ^2
+
 
 
 Now, let us consider the natural logarithm function:
@@ -253,25 +398,31 @@ LogI'(X) = V^(r*I') = LN(X) / LN(I')
 What is a logarithm?  It's a function such that
 logb(b^x) = x
 
-For a complex number raised to an integer power, this means that
-LogW(W^Z) = Z                                      <<definition of a logarithm
-K = W^Z                                            <<defining a new term
-LogW(K) = Z                                        <<substitution
-LogW(K) = LogE(K) / LogE(W)                        <<change of base rule: logb(x) = logd(x)/logd(b)
-LogW(K) = LN(K) / LN(W)                            <<LogE(X) = LN(X)
-LogW(K) * LN(W) = LN(K)                            <<multiplication by LN(W)
-LN(K) = LogW(K) * LN(W)                            <<rearranging
-E^LN(K)  = E^[LogW(K)*LN(W)]                       <<exponentiating both sides by E
-K = E^[LogW(K)*LN(W)]                              <<E^LN(X) = X
-K = E ^ [Z  *  LN(W)]                              <<substitution
-W^Z = E^[Z*LN(W)]                                  <<substitution
-W' = LN(W)                                         <<defining a new term W'
-E^(W') = W                                         <<E^LN(X)= X
 
------------------------------------------------------------------------------------
-Suppose W = (I*Rw)*E^(I'*θw)                       <<good guess from the guys who know the answer
+W^Z = (E^LN(W))^Z                                  <<E^LN(X) = X
+W^Z = E^(Z * LN(W))                                <<(X^A)^B = X^(A*B)
+Suppose R=I*Rw and θ'=I'*θw; let's make the below guess
+W = R*E^θ'                                         <<good guess from the guys who know the answer
+W^Z = E^(Z*LN[R * E^θ'])                           <<substitution
+W^Z = E^[Z*(LN[R] + LN[E^θ'])]                     <<LN(A*B) = LN(A) + LN(B)
+W^Z = E^[Z*(LN[R]+θ')]                             <<LN(E^X) = X
+W^Z = E^[Z*LN(R)+Z*(θ')]                           <<X*(A+B) = X*A + X*B
+W^Z = E^[Z*LN(R)]*E^[Z*θ']                         <<X^(A+B) = (X^A)*(X^B)
+W^Z = ([E^LN(R)]^Z)*E^[Z*θ']                       <<X^(A*B) = (X^A)^B
+W^Z = (R^Z)*E^[Z*θ']                               <<LN(E^X) = X
+
 W^Z = [(I*Rw)*E^(I'*θw)]^Z                         <<Exponentiating the above line by the vector Z
 W^Z = E^[Z*LN(W)]                                  <<copied from the line before we defined W'
-Then W' = LN[(I*Rw)*E^(I'*θw)]                     <<substitution
+
+
+W' = LN(W)                                         <<copied from original definition
+W' = LN[(I*Rw)*E^(I'*θw)]                          <<substitution
 W' = LN(I*Rw) + LN(E^(I'*θw))                      <<Ln(A*B) = Ln(A)+Ln(B)
 W' = LN(I*Rw) + I'*θw				               <<Ln(E^(X)) = X
+W = E^(W')					                       <<copied from above
+W = E^[LN(I*Rw) + I'*θw]                           <<substituting W'
+
+
+W = (I*Rw)*E^(I'*θw)                               <<good guess from the guys who know the answer
+W^Z = [(I*Rw)   * E^(I'*θw)]^Z                     <<Exponentiating the above line by the vector Z
+W^Z = E^(Z * LN(W))                                   <<copied from above
